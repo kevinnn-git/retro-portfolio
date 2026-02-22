@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WASIM.PC — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════ BOOT SCREEN ═══════════════════ -->
+  <div id="boot-screen">
+    <div class="boot-logo">
+      <div class="boot-logo-icon">🖥️</div>
+      <div class="boot-title">WASIM<span>OS</span></div>
+      <div class="boot-subtitle">Professional Edition</div>
+    </div>
+    <div class="boot-progress-wrap">
+      <div class="boot-bar-label">Loading system resources...</div>
+      <div class="boot-bar-track">
+        <div class="boot-bar-fill" id="boot-bar"></div>
+      </div>
+    </div>
+    <div class="boot-copyright">© 2025 Syed Wasim Mahmud. All Rights Reserved.</div>
+  </div>
+
+  <!-- ═══════════════════ DESKTOP ═══════════════════ -->
+  <div id="desktop" style="display:none;">
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <div class="desk-icon" onclick="openWindow('about-win')">
+        <div class="icon-img">👤</div>
+        <div class="icon-label">About Me</div>
+      </div>
+      <div class="desk-icon" onclick="openWindow('exp-win')">
+        <div class="icon-img">💼</div>
+        <div class="icon-label">Experience</div>
+      </div>
+      <div class="desk-icon" onclick="openWindow('proj-win')">
+        <div class="icon-img">📁</div>
+        <div class="icon-label">Projects</div>
+      </div>
+      <div class="desk-icon" onclick="openWindow('skills-win')">
+        <div class="icon-img">⚙️</div>
+        <div class="icon-label">Skills</div>
+      </div>
+      <div class="desk-icon" onclick="openWindow('edu-win')">
+        <div class="icon-img">🎓</div>
+        <div class="icon-label">Education &amp;\nCertifications</div>
+      </div>
+      <div class="desk-icon" onclick="openWindow('contact-win')">
+        <div class="icon-img">📧</div>
+        <div class="icon-label">Contact</div>
+      </div>
+      <div class="desk-icon" id="recycle-icon">
+        <div class="icon-img">🗑️</div>
+        <div class="icon-label">Recycle Bin</div>
+      </div>
+    </div>
+
+    <!-- ═══ WELCOME WINDOW ═══ -->
+    <div class="win98-window" id="welcome-win" style="top:30px;left:220px;width:520px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'welcome-win')">
+        <div class="win-title"><span class="win-icon">🖥️</span> Welcome — WASIM.PC</div>
+        <div class="win-controls">
+          <button class="wbtn minimize" onclick="minimizeWindow('welcome-win')">_</button>
+          <button class="wbtn maximize" onclick="toggleMaximize('welcome-win')">□</button>
+          <button class="wbtn close" onclick="closeWindow('welcome-win')">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar">
+        <span>File</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-body welcome-body">
+        <div class="avatar-area">
+          <div class="avatar-frame">
+            <div class="avatar-inner">SW</div>
+          </div>
+          <div class="status-dot"></div>
+        </div>
+        <div class="welcome-info">
+          <h1 class="welcome-name">SYED WASIM MAHMUD</h1>
+          <div class="welcome-role">Data Analyst &nbsp;|&nbsp; Analytics &nbsp;|&nbsp; AI Solutions</div>
+          <div class="welcome-divider"></div>
+          <div class="welcome-meta">
+            <span>📍 Titabar, Assam 785630</span>
+            <span>📞 +91-6002589358</span>
+            <span>✉️ wasimmahmud266@gmail.com</span>
+          </div>
+          <div class="welcome-links">
+            <a class="retro-link" href="https://linkedin.com/in/wasim-mahmud266" target="_blank">
+              <span class="link-icon">🔗</span> LinkedIn
+            </a>
+            <a class="retro-link" href="https://github.com/kevinnn-git" target="_blank">
+              <span class="link-icon">🐙</span> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="win-statusbar">
+        <span>System: Online</span><span class="sb-sep">|</span><span>Status: Ready</span>
+      </div>
+    </div>
+
+    <!-- ═══ ABOUT WINDOW ═══ -->
+    <div class="win98-window hidden" id="about-win" style="top:60px;left:180px;width:540px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'about-win')">
+        <div class="win-title"><span class="win-icon">👤</span> About Me — Notepad</div>
+        <div class="win-controls">
+          <button class="wbtn minimize" onclick="minimizeWindow('about-win')">_</button>
+          <button class="wbtn maximize" onclick="toggleMaximize('about-win')">□</button>
+          <button class="wbtn close" onclick="closeWindow('about-win')">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar">
+        <span>File</span><span>Edit</span><span>Format</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-body notepad-body">
+        <div class="notepad-ruler">1234567890123456789012345678901234567890123456789012345678901234</div>
+        <p class="notepad-text">
+          <strong>PROFESSIONAL SUMMARY</strong><br /><br />
+          Motivated Data Analyst with a strong foundation in analysis, analytics, and AI solutions. Skilled in designing
+          dashboards, ETL pipelines and implementing ML models through rigorous academic and personal projects.
+          Proficient in Python, SQL, Power BI, and Generative AI, with a keen focus on solving problems through data and
+          AI driven insights.
+        </p>
+      </div>
+      <div class="win-statusbar"><span>Ln 1, Col 1</span><span class="sb-sep">|</span><span>Plain Text</span></div>
+    </div>
+
+    <!-- ═══ EXPERIENCE WINDOW ═══ -->
+    <div class="win98-window hidden" id="exp-win" style="top:80px;left:200px;width:540px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'exp-win')">
+        <div class="win-title"><span class="win-icon">💼</span> Experience — worklog.txt</div>
+        <div class="win-controls">
+          <button class="wbtn minimize" onclick="minimizeWindow('exp-win')">_</button>
+          <button class="wbtn maximize" onclick="toggleMaximize('exp-win')">□</button>
+          <button class="wbtn close" onclick="closeWindow('exp-win')">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar"><span>File</span><span>Edit</span><span>Help</span></div>
+      <div class="win-body">
+        <div class="exp-block">
+          <div class="exp-header">
+            <span class="exp-role">Market Research Analyst</span>
+            <span class="exp-company">— Syync</span>
+            <span class="exp-badge">Contract: 3 Months</span>
+          </div>
+          <ul class="retro-list">
+            <li>Scraped and structured market data on brands, SKUs, influencers, and growth signals from public web
+              sources.</li>
+            <li>Cleaned and validated datasets by handling missing values, uncertainty, and exclusion rules.</li>
+            <li>Built an interactive dashboard to analyze brand performance and market trends, delivering actionable
+              insights.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="win-statusbar"><span>1 record found</span><span class="sb-sep">|</span><span>Objects: 3</span></div>
+    </div>
+
+    <!-- ═══ PROJECTS WINDOW ═══ -->
+    <div class="win98-window hidden" id="proj-win" style="top:100px;left:160px;width:580px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'proj-win')">
+        <div class="win-title"><span class="win-icon">📁</span> C:\Projects — Explorer</div>
+        <div class="win-controls">
+          <button class="wbtn minimize" onclick="minimizeWindow('proj-win')">_</button>
+          <button class="wbtn maximize" onclick="toggleMaximize('proj-win')">□</button>
+          <button class="wbtn close" onclick="closeWindow('proj-win')">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar">
+        <span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Favorites</span><span>Tools</span><span>Help</span>
+      </div>
+      <div class="win-toolbar">
+        <button class="toolbar-btn">⬅ Back</button>
+        <button class="toolbar-btn">➡ Forward</button>
+        <button class="toolbar-btn">⬆ Up</button>
+        <div class="addr-bar"><span class="addr-label">Address</span><span class="addr-val">C:\Projects\Wasim</span>
+        </div>
+      </div>
+      <div class="win-body explorer-body">
+        <!-- Left panel -->
+        <div class="explorer-tree">
+          <div class="tree-section">📁 Projects</div>
+          <div class="tree-item active" onclick="showProject('p1',this)">📄 BizAnalytics</div>
+          <div class="tree-item" onclick="showProject('p2',this)">📄 CustSegment</div>
+          <div class="tree-item" onclick="showProject('p3',this)">📄 SalesForecast</div>
+          <div class="tree-item" onclick="showProject('p4',this)">📄 FedSwarm</div>
+          <div class="tree-item" onclick="showProject('p5',this)">📄 VideoSummary</div>
+        </div>
+        <!-- Right panel -->
+        <div class="explorer-content">
+
+          <div class="proj-detail active" id="p1">
+            <div class="proj-title">📊 End-to-End Business Analytics Case Study</div>
+            <div class="proj-tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Power
+                BI</span><span class="tag">Pandas</span></div>
+            <ul class="retro-list">
+              <li>Analyzed e-commerce sales and customer data using SQL, Python Pandas, and Power BI.</li>
+              <li>Designed relational data models and advanced SQL queries to compute critical business KPIs.</li>
+              <li>Developed interactive Power BI dashboards analyzing churn, customer behavior, marketing performance,
+                and revenue trends.</li>
+            </ul>
+          </div>
+
+          <div class="proj-detail" id="p2">
+            <div class="proj-title">🎯 Customer Segmentation &amp; Analytics Dashboard</div>
+            <div class="proj-tags"><span class="tag">MySQL</span><span class="tag">Python</span><span
+                class="tag">K-Means</span><span class="tag">Power BI</span><span class="tag">DAX</span></div>
+            <ul class="retro-list">
+              <li>Designed end-to-end ETL pipeline using MySQL and Python for customer behavior pattern analysis.</li>
+              <li>Implemented K-Means clustering and RFM analysis identifying 2 distinct customer segments for
+                targeting.</li>
+              <li>Built interactive Power BI dashboards with advanced DAX enabling revenue growth strategy decisions.
+              </li>
+            </ul>
+          </div>
+
+          <div class="proj-detail" id="p3">
+            <div class="proj-title">📈 Sales Forecasting with XGBoost Regressor</div>
+            <div class="proj-tags"><span class="tag">XGBoost</span><span class="tag">Python</span><span
+                class="tag">Optuna</span><span class="tag">ML</span></div>
+            <ul class="retro-list">
+              <li>Developed a Sales Forecasting Model to predict revenue trends using Python and advanced machine
+                learning techniques for business decision optimization.</li>
+              <li>Performed data cleaning, exploratory data analysis (EDA), and feature engineering, including label
+                encoding to improve model accuracy.</li>
+              <li>Trained and optimized an XGBoost Regressor with Optuna hyperparameter tuning, and evaluated
+                performance using R², MAE, MAPE, RMSE, and SMAPE, ensuring robust and reliable forecasting results.</li>
+            </ul>
+          </div>
+
+          <div class="proj-detail" id="p4">
+            <div class="proj-title">🤖 Federated Data Intelligence Swarm</div>
+            <div class="proj-tags"><span class="tag">Gemini AI</span><span class="tag">SQL</span><span
+                class="tag">NLP</span><span class="tag">PII Redaction</span><span class="tag">Microservices</span></div>
+            <ul class="retro-list">
+              <li>Features an "Analyst Agent" powered by Google Gemini that translates natural language into SQL queries
+                and automatically debugs its own code if errors occur.</li>
+              <li>Utilizes a specialized "Compliance Agent" that intercepts query results to redact PII (such as names
+                and emails) using a hybrid approach of Regex and AI reasoning.</li>
+              <li>Simulates a microservices environment where agents act independently and communicate via a structured
+                protocol, ensuring a strict separation between data retrieval and security enforcement.</li>
+            </ul>
+          </div>
+
+          <div class="proj-detail" id="p5">
+            <div class="proj-title">🎬 Context-Aware Video Summary Assistant</div>
+            <div class="proj-tags"><span class="tag">RAG</span><span class="tag">Gemini API</span><span
+                class="tag">FAISS</span><span class="tag">Transformers</span><span class="tag">YouTube API</span></div>
+            <ul class="retro-list">
+              <li>Developed an AI-powered educational assistant that analyzes YouTube video transcripts to automatically
+                generate summaries, flashcards, MCQs, and curated learning resources.</li>
+              <li>Implemented transcript extraction and semantic search pipeline using youtube-transcript-api,
+                Sentence-Transformers, and FAISS indexing for efficient text retrieval and contextual understanding.
+              </li>
+              <li>Integrated Retrieval-Augmented Generation (RAG) with Gemini API and few-shot prompting to produce
+                structured educational content, enhancing knowledge retention and learning engagement through visuals,
+                quizzes, and smart recommendations.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="win-statusbar"><span>5 object(s)</span><span class="sb-sep">|</span><span>Select an item to view
+          details</span></div>
+    </div>
+
+    <!-- ═══ SKILLS WINDOW ═══ -->
+    <div class="win98-window hidden" id="skills-win" style="top:90px;left:170px;width:540px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'skills-win')">
+        <div class="win-title"><span class="win-icon">⚙️</span> Skills — Control Panel</div>
+        <div class="win-controls">
+          <button class="wbtn minimize" onclick="minimizeWindow('skills-win')">_</button>
+          <button class="wbtn maximize" onclick="toggleMaximize('skills-win')">□</button>
+          <button class="wbtn close" onclick="closeWindow('skills-win')">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar"><span>File</span><span>View</span><span>Help</span></div>
+      <div class="win-body control-panel-body">
+
+        <div class="cp-section">
+          <div class="cp-section-title">📊 Analytics &amp; BI</div>
+          <div class="cp-grid">
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Advanced Excel</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Power BI</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>DAX</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Data Visualization</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Data Cleaning</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Statistics</span></label>
+          </div>
+        </div>
+
+        <div class="cp-section">
+          <div class="cp-section-title">💻 Programming</div>
+          <div class="cp-grid">
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Python (NumPy, Pandas, Seaborn,
+                Matplotlib)</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>SQL</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>PySpark</span></label>
+          </div>
+        </div>
+
+        <div class="cp-section">
+          <div class="cp-section-title">🤖 Machine Learning</div>
+          <div class="cp-grid">
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Machine Learning
+                (Scikit-learn)</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Generative AI</span></label>
+          </div>
+        </div>
+
+        <div class="cp-section">
+          <div class="cp-section-title">🗄️ Data Engineering</div>
+          <div class="cp-grid">
+            <label class="cp-item"><input type="checkbox" checked disabled><span>ETL Pipeline</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Data Modelling</span></label>
+          </div>
+        </div>
+
+        <div class="cp-section">
+          <div class="cp-section-title">🧠 Soft Skills</div>
+          <div class="cp-grid">
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Analytical Thinking</span></label>
+            <label class="cp-item"><input type="checkbox" checked disabled><span>Business Communication</span></label>
+          </div>
+        </div>
+
+      </div>
+      <div class="win-statusbar"><span>14 skills installed</span><span class="sb-sep">|</span><span>All systems
+          operational</span></div>
+    </div>
+
+    <!-- ═══ EDUCATION WINDOW ═══ -->
+    <div class="win98-window hidden" id="edu-win" style="top:70px;left:190px;width:560px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'edu-win')">
+        <div class="win-title"><span class="win-icon">🎓</span> Education &amp; Certifications — Properties</div>
+        <div class="win-controls">
+          <button class="wbtn minimize" onclick="minimizeWindow('edu-win')">_</button>
+          <button class="wbtn maximize" onclick="toggleMaximize('edu-win')">□</button>
+          <button class="wbtn close" onclick="closeWindow('edu-win')">✕</button>
+        </div>
+      </div>
+      <div class="win-body props-body">
+
+        <!-- Tab Strip -->
+        <div class="tab-strip">
+          <div class="tab active" onclick="switchTab(event,'edu-tab')">Education</div>
+          <div class="tab" onclick="switchTab(event,'cert-tab')">Certifications</div>
+        </div>
+
+        <!-- Education Tab -->
+        <div class="tab-content active" id="edu-tab">
+          <div class="edu-block">
+            <div class="edu-icon">🎓</div>
+            <div class="edu-info">
+              <div class="edu-degree">Bachelor of Computer Applications (Data Analytics)</div>
+              <div class="edu-uni">University of Science and Technology Meghalaya</div>
+              <div class="edu-meta">
+                <span class="edu-date">June 2022 – September 2025</span>
+                <span class="edu-grade">Grade: A</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications Tab -->
+        <div class="tab-content" id="cert-tab">
+          <div class="cert-list">
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">Google</span><span
+                class="cert-name">Cloud Data Analytics</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">Microsoft</span><span
+                class="cert-name">Power BI Certifications</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">Snowflake</span><span
+                class="cert-name">Data Warehousing</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">Alteryx</span><span
+                class="cert-name">Designer Core</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">HackerRank</span><span
+                class="cert-name">SQL Intermediate</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">Google</span><span
+                class="cert-name">Google Analytics (GA4)</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">Forage</span><span
+                class="cert-name">Data Analytics Job Simulation (Deloitte)</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">Tutedude</span><span
+                class="cert-name">Data Science</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">AWS</span><span
+                class="cert-name">Introduction to Prompt Engineering</span></div>
+            <div class="cert-item"><span class="cert-badge">✔</span><span class="cert-org">Kaggle</span><span
+                class="cert-name">Gen AI</span></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="dialog-btns">
+        <button class="retro-btn" onclick="closeWindow('edu-win')">OK</button>
+        <button class="retro-btn" onclick="closeWindow('edu-win')">Cancel</button>
+        <button class="retro-btn">Apply</button>
+      </div>
+    </div>
+
+    <!-- ═══ CONTACT WINDOW ═══ -->
+    <div class="win98-window hidden" id="contact-win" style="top:120px;left:200px;width:420px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'contact-win')">
+        <div class="win-title"><span class="win-icon">📧</span> Contact — Send Message</div>
+        <div class="win-controls">
+          <button class="wbtn minimize" onclick="minimizeWindow('contact-win')">_</button>
+          <button class="wbtn maximize" onclick="toggleMaximize('contact-win')">□</button>
+          <button class="wbtn close" onclick="closeWindow('contact-win')">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar"><span>File</span><span>View</span><span>Help</span></div>
+      <div class="win-body contact-body">
+        <div class="contact-row">
+          <div class="contact-icon">📧</div>
+          <div class="contact-detail">
+            <div class="contact-label">Email</div>
+            <a class="contact-val" href="mailto:wasimmahmud266@gmail.com">wasimmahmud266@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📞</div>
+          <div class="contact-detail">
+            <div class="contact-label">Phone</div>
+            <a class="contact-val" href="tel:+916002589358">+91-6002589358</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📍</div>
+          <div class="contact-detail">
+            <div class="contact-label">Location</div>
+            <span class="contact-val">Titabar, Assam 785630</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">🔗</div>
+          <div class="contact-detail">
+            <div class="contact-label">LinkedIn</div>
+            <a class="contact-val" href="https://linkedin.com/in/wasim-mahmud266"
+              target="_blank">linkedin.com/in/wasim-mahmud266</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">🐙</div>
+          <div class="contact-detail">
+            <div class="contact-label">GitHub</div>
+            <a class="contact-val" href="https://github.com/kevinnn-git" target="_blank">github.com/kevinnn-git</a>
+          </div>
+        </div>
+        <div class="contact-compose">
+          <div class="compose-label">Send a quick note:</div>
+          <textarea class="retro-textarea" placeholder="Type your message here..." rows="3"></textarea>
+          <div class="compose-actions">
+            <button class="retro-btn primary-btn" onclick="sendMsg()">📤 Send</button>
+            <button class="retro-btn" onclick="closeWindow('contact-win')">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class="win-statusbar"><span>Ready</span></div>
+    </div>
+
+    <!-- ═══ TASKBAR ═══ -->
+    <div id="taskbar">
+      <div class="start-btn" id="start-btn" onclick="toggleStartMenu()">
+        <span class="start-logo">🖥️</span> Start
+      </div>
+      <div class="taskbar-windows" id="taskbar-windows"></div>
+      <div class="taskbar-clock" id="taskbar-clock"></div>
+    </div>
+
+    <!-- ═══ START MENU ═══ -->
+    <div id="start-menu" class="hidden">
+      <div class="start-header">
+        <div class="start-avatar">SW</div>
+        <div class="start-user-info">
+          <div class="start-user-name">Syed Wasim</div>
+          <div class="start-user-role">Data Analyst</div>
+        </div>
+      </div>
+      <div class="start-divider"></div>
+      <div class="start-items">
+        <div class="start-item" onclick="openWindow('about-win');toggleStartMenu()">👤 About Me</div>
+        <div class="start-item" onclick="openWindow('exp-win');toggleStartMenu()">💼 Experience</div>
+        <div class="start-item" onclick="openWindow('proj-win');toggleStartMenu()">📁 Projects</div>
+        <div class="start-item" onclick="openWindow('skills-win');toggleStartMenu()">⚙️ Skills</div>
+        <div class="start-item" onclick="openWindow('edu-win');toggleStartMenu()">🎓 Education &amp; Certs</div>
+        <div class="start-item" onclick="openWindow('contact-win');toggleStartMenu()">📧 Contact</div>
+      </div>
+      <div class="start-divider"></div>
+      <div class="start-items">
+        <div class="start-item danger" onclick="shutDown()">⏻ Shut Down...</div>
+      </div>
+    </div>
+
+    <!-- ═══ MSG DIALOG ═══ -->
+    <div class="win98-window hidden" id="msg-dialog" style="top:200px;left:300px;width:360px;z-index:9999;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'msg-dialog')">
+        <div class="win-title"><span class="win-icon">ℹ️</span> System Message</div>
+        <div class="win-controls">
+          <button class="wbtn close" onclick="closeWindow('msg-dialog')">✕</button>
+        </div>
+      </div>
+      <div class="win-body dialog-body">
+        <div class="dialog-icon">📧</div>
+        <div class="dialog-text">Message sent! Wasim will get back to you soon.</div>
+      </div>
+      <div class="dialog-btns">
+        <button class="retro-btn" onclick="closeWindow('msg-dialog')">OK</button>
+      </div>
+    </div>
+
+    <!-- ═══ SHUTDOWN DIALOG ═══ -->
+    <div class="win98-window hidden" id="shutdown-dialog" style="top:250px;left:320px;width:360px;z-index:9999;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'shutdown-dialog')">
+        <div class="win-title"><span class="win-icon">⚠️</span> Shut Down — WasimOS</div>
+        <div class="win-controls">
+          <button class="wbtn close" onclick="closeWindow('shutdown-dialog')">✕</button>
+        </div>
+      </div>
+      <div class="win-body dialog-body">
+        <div class="dialog-icon">⏻</div>
+        <div class="dialog-text">Are you sure you want to exit this portfolio?</div>
+      </div>
+      <div class="dialog-btns">
+        <button class="retro-btn danger-btn" onclick="doShutdown()">Shut Down</button>
+        <button class="retro-btn" onclick="closeWindow('shutdown-dialog')">Cancel</button>
+      </div>
+    </div>
+
+  </div><!-- /desktop -->
+
+  <script src="script.js"></script>
+</body>
+
+</html>
