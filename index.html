@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Wasim Mahmud — Data Analyst Portfolio</title>
+    <meta name="description" content="Data Analyst with 1+ year of experience in data analysis, ETL pipelines, and dashboard reporting. Proficient in SQL, Python, Excel, and Power BI for data cleaning, modeling, and visualization.">
+    <meta name="author" content="Syed Wasim Mahmud">
+    <meta property="og:title" content="Syed Wasim Mahmud — Data Analyst Portfolio">
+    <meta property="og:description" content="Passionate About Analytics | Storyteller with Data | Turning Data into Actionable Business Insights">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== STARFIELD BACKGROUND ===== -->
+    <canvas id="starfield"></canvas>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">WM</div>
+        </div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">WM</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-socials">
+                <a href="https://linkedin.com/in/wasim-mahmud266" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://github.com/kevinnn-git" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-inner">
+            <div class="mobile-menu-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="mobile-menu-socials">
+                <a href="https://linkedin.com/in/wasim-mahmud266" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://github.com/kevinnn-git" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+
+        <!-- ===== HERO ===== -->
+        <section id="hero" class="section hero">
+            <div class="hero-bg">
+                <canvas id="hero-canvas"></canvas>
+            </div>
+            <!-- Space Planets -->
+            <div class="planet planet-mercury"></div>
+            
+            <!-- 3D Geometric Element -->
+            <div class="space-3d-geometry">
+                <div class="cube-3d">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-greeting reveal">Hello, I'm</div>
+                <h1 class="hero-name reveal reveal-delay-1">
+                    <span>Syed Wasim</span> <span class="highlight">Mahmud</span>
+                </h1>
+                <div class="hero-tagline reveal reveal-delay-2"></div>
+                <p class="hero-description reveal reveal-delay-3">
+                    Data Analyst with 1+ year of experience in data analysis, ETL pipelines, and dashboard reporting. Proficient in SQL, Python, Excel, and Power BI for data cleaning, modeling, and visualization. Passionate about leveraging analytics and Generative AI to drive data-driven business decisions.
+                </p>
+                <div class="hero-cta reveal reveal-delay-4">
+                    <a href="#projects" class="btn-primary">View Projects</a>
+                    <a href="#contact" class="btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="line"></div>
+                <span>Scroll</span>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT & EDUCATION ===== -->
+        <section id="about" class="section">
+            <div class="planet planet-earth"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">01</div>
+                    <h2>About & Education</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-bio reveal">
+                        <p>Data Analyst | Passionate About Analytics | Storyteller with Data | Turning Data into Actionable Business Insights | Passionate About Gen AI | (SQL, Power BI, Python, Excel)</p>
+                        <p>Data Analyst with 1+ year of experience in data analysis, ETL pipelines, and dashboard reporting. Proficient in SQL, Python, Excel, and Power BI for data cleaning, modeling, and visualization. Passionate about leveraging analytics and Generative AI to drive data-driven business decisions.</p>
+                    </div>
+                    <div class="education-timeline">
+                        <div class="timeline-item reveal reveal-right">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Bachelor of Computer Applications (BCA)</h3>
+                                <div class="timeline-institution">University of Science & Technology, Meghalaya (USTM)</div>
+                                <div class="timeline-meta">
+                                    <span>Jul 2022 – Jul 2025</span>
+                                    <span>Grade: A</span>
+                                </div>
+                                <ul class="timeline-details">
+                                    <li>Specialization: Data Analytics</li>
+                                    <li>Electives: Business Administration</li>
+                                    <li>Core Skills: Data Analytics, Digital Communication</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal reveal-right reveal-delay-2">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Higher Secondary (12th Standard)</h3>
+                                <div class="timeline-institution">Pragjyotika Senior Secondary School</div>
+                                <div class="timeline-meta">
+                                    <span>2020 – 2022</span>
+                                    <span>Stream: Arts</span>
+                                    <span>Grade: A</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== EXPERIENCE ===== -->
+        <section id="experience" class="section">
+            <div class="planet planet-venus"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">02</div>
+                    <h2>Experience</h2>
+                </div>
+                <div class="experience-card reveal">
+                    <div class="experience-card-inner">
+                        <div class="experience-header">
+                            <h3>Market Research Analyst</h3>
+                            <div class="experience-company">Syync · Full-time (Remote — Hyderabad, Telangana, India)</div>
+                            <div class="experience-duration">Jan 2025 – Mar 2026 · 1 year 3 months</div>
+                        </div>
+                        <ul class="experience-details">
+                            <li><strong>Data Engineering & Scraping:</strong> Extracted, scraped, and structured high-volume market intelligence data on brands, SKUs, digital influencers, and emerging growth signals from diverse public web sources.</li>
+                            <li><strong>Data Quality & Validation:</strong> Developed rigorous data cleaning workflows, systematically handling missing values, calculating uncertainty metrics, and establishing strict data exclusion rules to ensure production-grade dataset accuracy.</li>
+                            <li><strong>Business Intelligence:</strong> Built interactive, analytical dashboards to monitor, baseline, and benchmark brand performance and competitive market trends, translating raw data into actionable insights for corporate decision-makers.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== SKILLS ===== -->
+        <section id="skills" class="section">
+            <div class="planet planet-mars"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">03</div>
+                    <h2>Skills</h2>
+                </div>
+                <div class="skills-grid">
+
+                    <!-- AI & Machine Learning -->
+                    <div class="skill-category reveal">
+                        <div class="skill-category-header">
+                            <h3>AI & Machine Learning</h3>
+                            <span class="skill-count">13</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Science</span>
+                            <span class="skill-tag">AI Agents</span>
+                            <span class="skill-tag">Google Agent Development Kit (ADK)</span>
+                            <span class="skill-tag">Generative AI</span>
+                            <span class="skill-tag">Prompt Engineering</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Supervised Learning</span>
+                            <span class="skill-tag">Unsupervised Learning</span>
+                            <span class="skill-tag">Machine Learning Pipeline</span>
+                            <span class="skill-tag">Machine Learning Model Evaluation</span>
+                            <span class="skill-tag">Machine Learning Model Tuning</span>
+                            <span class="skill-tag">Feature Selection</span>
+                            <span class="skill-tag">Feature Engineering</span>
+                        </div>
+                    </div>
+
+                    <!-- Data Analysis & Visualization -->
+                    <div class="skill-category reveal reveal-delay-1">
+                        <div class="skill-category-header">
+                            <h3>Data Analysis & Visualization</h3>
+                            <span class="skill-count">12</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Analytics</span>
+                            <span class="skill-tag">Business Analytics</span>
+                            <span class="skill-tag">Explanatory Data Analysis</span>
+                            <span class="skill-tag">Marketing Data Analysis</span>
+                            <span class="skill-tag">Customer Analysis</span>
+                            <span class="skill-tag">Data Segmentation</span>
+                            <span class="skill-tag">Statistical Learning</span>
+                            <span class="skill-tag">Time Series Analysis</span>
+                            <span class="skill-tag">Time Series Forecasting</span>
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Microsoft Power BI</span>
+                            <span class="skill-tag">Google Analytics</span>
+                        </div>
+                    </div>
+
+                    <!-- Engineering, Cloud & Programming -->
+                    <div class="skill-category reveal reveal-delay-2">
+                        <div class="skill-category-header">
+                            <h3>Engineering, Cloud & Programming</h3>
+                            <span class="skill-count">14</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python (Programming Language)</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Query Languages</span>
+                            <span class="skill-tag">Pandas (Software)</span>
+                            <span class="skill-tag">Matplotlib</span>
+                            <span class="skill-tag">Scikit-Learn</span>
+                            <span class="skill-tag">Data Cleaning</span>
+                            <span class="skill-tag">Data Quality</span>
+                            <span class="skill-tag">Data Modeling</span>
+                            <span class="skill-tag">Database Modeling</span>
+                            <span class="skill-tag">Relational Databases</span>
+                            <span class="skill-tag">Data Warehousing</span>
+                            <span class="skill-tag">Data Pipelines</span>
+                            <span class="skill-tag">ETL pipeline</span>
+                        </div>
+                    </div>
+
+                    <!-- Technologies & Platforms -->
+                    <div class="skill-category reveal reveal-delay-3">
+                        <div class="skill-category-header">
+                            <h3>Technologies & Platforms</h3>
+                            <span class="skill-count">7</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Google Cloud Platform (GCP)</span>
+                            <span class="skill-tag">Snowflake Cloud</span>
+                            <span class="skill-tag">Alteryx</span>
+                            <span class="skill-tag">Microsoft Business Intelligence (MSBI)</span>
+                            <span class="skill-tag">Microsoft Certified Technology</span>
+                            <span class="skill-tag">Microsoft Excel</span>
+                            <span class="skill-tag">Google Sheets</span>
+                            <span class="skill-tag">Excel Pivot</span>
+                        </div>
+                    </div>
+
+                    <!-- Business Strategy & Core Skills -->
+                    <div class="skill-category reveal reveal-delay-4">
+                        <div class="skill-category-header">
+                            <h3>Business Strategy & Core Skills</h3>
+                            <span class="skill-count">11</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Business Requirements</span>
+                            <span class="skill-tag">Business Administration</span>
+                            <span class="skill-tag">Business Development</span>
+                            <span class="skill-tag">Agile Methodologies</span>
+                            <span class="skill-tag">Analytical Thinking</span>
+                            <span class="skill-tag">Stakeholder Workshops</span>
+                            <span class="skill-tag">Communication</span>
+                            <span class="skill-tag">Digital Communication</span>
+                            <span class="skill-tag">Presentation Skills</span>
+                            <span class="skill-tag">Teamwork</span>
+                            <span class="skill-tag">Microsoft Office Projects</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== PROJECTS ===== -->
+        <section id="projects" class="section">
+            <div class="planet planet-jupiter"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">04</div>
+                    <h2>Projects</h2>
+                </div>
+                <div class="projects-container">
+
+                    <!-- Advanced AI & Analytics Projects -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Advanced AI & Analytics Projects</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Federated Data Intelligence Swarm</h4>
+                                    <div class="project-card-focus">Core Focus: Multi-Agent Systems & Data Privacy</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Key Features & Architecture:</strong></li>
+                                        <li>Features an Analyst Agent powered by Google Gemini that translates natural language into SQL queries and automatically debugs its own code if errors occur.</li>
+                                        <li>Utilizes a specialized Compliance Agent that intercepts query results to redact Personally Identifiable Information (PII) using a hybrid approach of Regex and AI reasoning.</li>
+                                        <li>Simulates a microservices environment where agents act independently and communicate via a structured protocol, ensuring a strict separation between data retrieval and security enforcement.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Context Aware Video Summary Assistant</h4>
+                                    <div class="project-card-focus">Core Focus: Retrieval-Augmented Generation (RAG) & Educational Tech</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Key Features & Architecture:</strong></li>
+                                        <li>Developed an AI-powered educational assistant that analyzes YouTube video transcripts to automatically generate summaries, flashcards, MCQs, and curated learning resources.</li>
+                                        <li>Implemented a transcript extraction and semantic search pipeline using youtube-transcript-api, Sentence-Transformers, and FAISS indexing for efficient text retrieval and contextual understanding.</li>
+                                        <li>Integrated RAG with the Gemini API and few-shot prompting to produce structured educational content, enhancing knowledge retention through visuals, quizzes, and smart recommendations.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-2">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Customer Segmentation with ML & Power BI Dashboard</h4>
+                                    <div class="project-card-focus">Core Focus: Customer Analytics & Business Intelligence</div>
+                                    <div class="project-card-skills">
+                                        <span>Machine Learning</span>
+                                        <span>Microsoft Power BI</span>
+                                        <span>Data Modeling</span>
+                                        <span>Exploratory Data Analysis (EDA)</span>
+                                    </div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Key Features & Architecture:</strong></li>
+                                        <li>Designed and developed an analytics dashboard to uncover customer behavior patterns, identify high-value segments, and drive data-informed revenue growth.</li>
+                                        <li>Constructed an end-to-end ETL pipeline using MySQL and Python (Pandas, NumPy, Matplotlib, Seaborn) for data extraction, transformation, and feature engineering (including RFM metrics, encoding, and statistical analysis).</li>
+                                        <li>Implemented K-Means clustering and built interactive Power BI dashboards with advanced DAX calculations and visual storytelling to enable actionable business insights.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Forecasting & Predictive Modeling Pipelines -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Forecasting & Predictive Modeling Pipelines</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Sales Forecasting with XGB Regressor</h4>
+                                    <div class="project-card-focus">Predict revenue trends using advanced machine learning</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Predict revenue trends using advanced machine learning for business decision optimization.</li>
+                                        <li><strong>Methods:</strong> Cleaned data, performed comprehensive EDA, and engineered features (including label encoding) to improve model accuracy.</li>
+                                        <li><strong>Optimization & Validation:</strong> Trained and optimized an XGBoost Regressor with Optuna hyperparameter tuning. Evaluated performance using a robust suite of metrics: R², MAE, MAPE, RMSE, and SMAPE.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Time Series Sales Forecasting & Seasonality Analysis</h4>
+                                    <div class="project-card-focus">Time series modeling for sales trends</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Develop a time series model to predict sales trends and decode complex seasonal patterns.</li>
+                                        <li><strong>Methods:</strong> Applied SARIMA for temporal modeling and utilized the Augmented Dickey-Fuller (ADF) Test to ensure data stationarity.</li>
+                                        <li><strong>Optimization & Outcome:</strong> Used ACF/PACF plots for feature selection and Grid Search for hyperparameter tuning, achieving a robust forecast by effectively separating temporal signals from noise.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Healthcare Diagnostic Systems -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Healthcare Diagnostic Systems</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Cardiac Disease Classification System</h4>
+                                    <div class="project-card-focus">Highly sensitive diagnostic model for cardiac disease</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Build a highly sensitive diagnostic model to predict the presence of cardiac disease.</li>
+                                        <li><strong>Methods:</strong> Utilized XGBoost for classification and Optuna for automated hyperparameter tuning.</li>
+                                        <li><strong>Validation & Outcome:</strong> Implemented K-Fold Cross-Validation to ensure model generalization, delivering a robust, reliable predictor suitable for critical healthcare use cases.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Diabetes Classification Pipeline</h4>
+                                    <div class="project-card-focus">Production-ready ML pipeline for diabetes risk</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Build a robust, production-ready machine learning pipeline to predict diabetes risk.</li>
+                                        <li><strong>Methods:</strong> Utilized K-Nearest Neighbors (KNN) within a streamlined Scikit-learn pipeline and applied SMOTE to effectively resolve class imbalance.</li>
+                                        <li><strong>Optimization & Validation:</strong> Integrated Optuna for automated hyperparameter tuning of distance metrics and neighbor counts alongside K-Fold Cross-Validation to prevent overfitting.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Foundational Workflow & Analysis Projects -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Foundational Workflow & Analysis Projects</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Titanic Survival Prediction</h4>
+                                    <div class="project-card-focus">Production-style classification workflow</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Engineer a production-style classification workflow to predict passenger survival while avoiding data leakage.</li>
+                                        <li><strong>Methods:</strong> Built robust Scikit-learn Pipelines and implemented a Naive Bayes classifier for probabilistic classification.</li>
+                                        <li><strong>Optimization & Validation:</strong> Integrated Optuna for automated, dynamic hyperparameter fine-tuning and applied K-Fold Cross-Validation to ensure model stability.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">COVID-19 Analysis</h4>
+                                    <div class="project-card-focus">End-to-end global health data analysis</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Conduct end-to-end data collection, cleaning, and exploratory analysis on global health data.</li>
+                                        <li><strong>Methods:</strong> Developed a Python-based analysis workflow using Pandas, NumPy, Matplotlib, and Seaborn.</li>
+                                        <li><strong>Outcome:</strong> Performed statistical analysis and data visualization to uncover key trends influencing virus spread, mortality, and recovery rates, generating actionable reports to support data-driven decision-making.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Industry Job Simulations -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Industry Job Simulations</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Data Analytics Job Simulation (Deloitte)</h4>
+                                    <div class="project-card-focus">Core Focus: Operational Efficiency & Dashboard Design</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Execution:</strong> Created interactive Tableau dashboards and performed detailed Excel analyses using machine telemetry and employee data.</li>
+                                        <li><strong>Outcome:</strong> Enabled detailed insights, drill-down filtering, and classification to improve operational efficiency and support informed decision-making regarding workplace fairness.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Data Science Job Simulation (Boston Consulting Group)</h4>
+                                    <div class="project-card-focus">Core Focus: Business Hypothesis Testing</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Execution:</strong> Investigated a core corporate business problem by formulating hypotheses, exploring data patterns, and engineering features to enhance model accuracy.</li>
+                                        <li><strong>Outcome:</strong> Interpreted results and delivered actionable, data-backed recommendations closely aligned with high-level business objectives.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== CERTIFICATIONS ===== -->
+        <section id="certifications" class="section">
+            <div class="planet planet-saturn"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">05</div>
+                    <h2>Certifications</h2>
+                </div>
+                <div class="cert-grid">
+                    <div class="cert-item reveal"><span class="cert-name">Google Cloud Data Analytics Certificate</span><span class="cert-issuer">Google</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Alteryx Designer Core Certified</span><span class="cert-issuer">Alteryx</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Snowflake Data Warehousing</span><span class="cert-issuer">Snowflake</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">HackerRank Intermediate SQL</span><span class="cert-issuer">HackerRank</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Microsoft Certified: Power BI Developer</span><span class="cert-issuer">Microsoft</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Tutedude Certified Data Science</span><span class="cert-issuer">Tutedude</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Google Analytics</span><span class="cert-issuer">Google Digital Academy (Skillshop)</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Google X Kaggle AI Agents 5 Day Intensive</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Foundations of Prompt Engineering</span><span class="cert-issuer">Amazon Web Services (AWS)</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Google X Kaggle Gen AI 5 Day Intensive</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to Game AI and Reinforcement Learning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Machine Learning Explainability</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Geospatial Analysis</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to AI Ethics</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Data Cleaning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Time Series</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Computer Vision</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to Deep Learning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Advance SQL</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to SQL</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Feature Engineering</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Data Visualization</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intermediate Machine Learning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Pandas</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to Machine Learning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Python</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to Programming</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Foundations: Data, Data, Everywhere</span><span class="cert-issuer">Coursera and Google</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Microsoft and Simplilearn certified Power BI course</span><span class="cert-issuer">Simplilearn</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">BCG - Data Science Job Simulation</span><span class="cert-issuer">Forage</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Deloitte Australia - Data Analytics Job Simulation</span><span class="cert-issuer">Forage</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Forward Program</span><span class="cert-issuer">McKinsey</span></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact" class="section">
+            <div class="planet planet-neptune"></div>
+            <div class="planet planet-uranus"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">06</div>
+                    <h2>Get in Touch</h2>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-text reveal">
+                        <h3>Let's work together</h3>
+                        <p>I'm always open to discussing new opportunities, data projects, and analytics challenges. Whether you need a data analyst, a collaborator on an AI project, or just want to connect — I'd love to hear from you.</p>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:wasimmahmud266@gmail.com" class="contact-item reveal reveal-right">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value">wasimmahmud266@gmail.com</div>
+                            </div>
+                        </a>
+                        <a href="https://linkedin.com/in/wasim-mahmud266" target="_blank" rel="noopener noreferrer" class="contact-item reveal reveal-right reveal-delay-1">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">LinkedIn</div>
+                                <div class="contact-value">linkedin.com/in/wasim-mahmud266</div>
+                            </div>
+                        </a>
+                        <a href="https://github.com/kevinnn-git" target="_blank" rel="noopener noreferrer" class="contact-item reveal reveal-right reveal-delay-2">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">GitHub</div>
+                                <div class="contact-value">github.com/kevinnn-git</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">© 2026 Syed Wasim Mahmud. All rights reserved.</div>
+            <div class="footer-right">Designed & Built with passion</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
