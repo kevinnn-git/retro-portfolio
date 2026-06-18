@@ -588,39 +588,46 @@ document.addEventListener('DOMContentLoaded', () => {
      14. Shooting Stars — More Frequent Shooting Stars
   ========================================================== */
   (() => {
+    let activeCount = 0;
+    const MAX_ACTIVE = 15;
+
     const launchShootingStar = () => {
+      if (activeCount >= MAX_ACTIVE) return;
+      activeCount++;
+
       const star = document.createElement('div');
       star.classList.add('shooting-star');
 
-      // Random position across the viewport
-      star.style.top = `${Math.random() * 50}%`;
-      star.style.left = `${Math.random() * 80}%`;
-      star.style.width = `${50 + Math.random() * 100}px`;
+      // Spawn from top/right quadrant so they can streak down-left
+      star.style.top = `${-10 + Math.random() * 50}%`;
+      star.style.left = `${40 + Math.random() * 70}%`;
+      star.style.width = `${60 + Math.random() * 120}px`;
 
-      // Angle variation
-      const angle = -20 - Math.random() * 30;
-      star.style.transform = `rotate(${angle}deg)`;
+      // Fixed angle for all shooting stars
+      const angle = -35;
+      star.style.setProperty('--angle', `${angle}deg`);
 
       document.body.appendChild(star);
 
       setTimeout(() => {
         if (star.parentNode) star.parentNode.removeChild(star);
+        activeCount--;
       }, 1600);
     };
 
-    // Launch 1-3 shooting stars per burst, every 1.5-4 seconds
+    // Launch 2-5 shooting stars per burst, every 0.8-2 seconds
     const scheduleNext = () => {
-      const delay = 1500 + Math.random() * 2500;
+      const delay = 800 + Math.random() * 1200;
       setTimeout(() => {
-        const burstCount = 1 + Math.floor(Math.random() * 3);
+        const burstCount = 2 + Math.floor(Math.random() * 4);
         for (let i = 0; i < burstCount; i++) {
-          setTimeout(launchShootingStar, i * 200);
+          setTimeout(launchShootingStar, i * 150);
         }
         scheduleNext();
       }, delay);
     };
 
-    setTimeout(scheduleNext, 2000);
+    setTimeout(scheduleNext, 1000);
   })();
 
   /* ==========================================================
@@ -701,43 +708,229 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   /* ==========================================================
-     16. 3D Interactive Card Tilt Effect
+     11. 3D Data Intelligence Core (Canvas)
   ========================================================== */
   (() => {
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) return; // Disable on mobile for performance and UX
+    const canvas = document.getElementById('c');
+    const wrap = document.getElementById('canvas-wrap');
+    if (!canvas || !wrap) return;
+    const ctx = canvas.getContext('2d');
 
-    const cards = document.querySelectorAll('.project-card, .experience-card, .skill-category, .cert-item');
+    let W, H, cx, cy;
+    function resize() {
+      W = wrap.clientWidth;
+      H = wrap.clientHeight;
+      canvas.width = W;
+      canvas.height = H;
+      cx = W / 2;
+      cy = H / 2;
+    }
+    resize();
+    window.addEventListener('resize', resize);
 
-    cards.forEach((card) => {
-      // Adding preserve-3d to children if needed, but for the card itself:
-      card.style.transformStyle = 'preserve-3d';
-      card.style.willChange = 'transform';
-
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left; // x position within the element
-        const y = e.clientY - rect.top;  // y position within the element
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        // Calculate rotation degrees (max 5 degrees for subtle premium effect)
-        const rotateX = ((y - centerY) / centerY) * -5;
-        const rotateY = ((x - centerX) / centerX) * 5;
-
-        // Apply 3D transform and slight pop
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-        card.style.transition = 'transform 0.1s ease'; // Quick follow
-        card.style.zIndex = '10'; // Bring to front while hovering
-      });
-
-      card.addEventListener('mouseleave', () => {
-        // Reset transform
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-        card.style.transition = 'transform 0.5s var(--transition-smooth)'; // Smooth reset back to flat
-        card.style.zIndex = '1';
-      });
+    const R = 120;
+    let t = 0;
+    let mouse = { x: 0, y: 0 };
+    window.addEventListener('mousemove', e => {
+      const r = wrap.getBoundingClientRect();
+      mouse.x = ((e.clientX - r.left) / W - 0.5) * 2;
+      mouse.y = ((e.clientY - r.top) / H - 0.5) * 2;
     });
+
+    const GOLDS = ['#fff8e7', '#f5d56e', '#e8b930', '#c9941a', '#a07012', '#f0e2a0'];
+
+    const RINGS = [
+      { rx: 155, ry: 42,  tilt:  0.22, speed:  0.007, color: '#e8b930', dash: [] },
+      { rx: 140, ry: 58,  tilt: -0.44, speed: -0.009, color: '#f5d56e', dash: [8, 4] },
+      { rx: 170, ry: 30,  tilt:  0.70, speed:  0.005, color: '#fff8e7', dash: [4, 8] },
+    ];
+
+    const NODES = [
+      { ring: 0, phase: 0,             label: 'SQL', col: '#fff8e7' },
+      { ring: 0, phase: Math.PI,       label: 'ETL', col: '#f5d56e' },
+      { ring: 1, phase: 0.5,           label: 'ML',  col: '#e8b930' },
+      { ring: 1, phase: 0.5+Math.PI,   label: 'BI',  col: '#fff8e7' },
+      { ring: 2, phase: 1.2,           label: 'API', col: '#f5d56e' },
+      { ring: 2, phase: 1.2+Math.PI,   label: 'AI',  col: '#e8b930' },
+    ];
+
+    const PARTS = Array.from({ length: 48 }, () => ({
+      theta: Math.random() * Math.PI * 2,
+      phi:   Math.acos(2 * Math.random() - 1),
+      r:     R + 10 + Math.random() * 60,
+      speed: (Math.random() - 0.5) * 0.012,
+      size:  1 + Math.random() * 2.5,
+      alpha: 0.3 + Math.random() * 0.5,
+      col:   GOLDS[Math.floor(Math.random() * GOLDS.length)]
+    }));
+
+    function spherePt(theta, phi, r) {
+      return {
+        x: r * Math.sin(phi) * Math.cos(theta),
+        y: r * Math.cos(phi),
+        z: r * Math.sin(phi) * Math.sin(theta)
+      };
+    }
+
+    function project(p, rotY, rotX) {
+      let x1 = p.x * Math.cos(rotY) + p.z * Math.sin(rotY);
+      let z1 = -p.x * Math.sin(rotY) + p.z * Math.cos(rotY);
+      let y2 = p.y * Math.cos(rotX) - z1 * Math.sin(rotX);
+      let z2 = p.y * Math.sin(rotX) + z1 * Math.cos(rotX);
+      const fov = 600;
+      const scale = fov / (fov + z2 + 200);
+      return { sx: x1 * scale + cx, sy: y2 * scale + cy, z: z2, scale };
+    }
+
+    function drawSphere(rotY, rotX) {
+      const LATS = 10, LONS = 16;
+      for (let lon = 0; lon < LONS; lon++) {
+        const theta = (lon / LONS) * Math.PI * 2;
+        const pts = [];
+        for (let i = 0; i <= 24; i++) {
+          pts.push(project(spherePt(theta, (i/24)*Math.PI, R), rotY, rotX));
+        }
+        for (let i = 0; i < pts.length - 1; i++) {
+          const a = pts[i], b = pts[i+1];
+          const fade = Math.max(0, Math.min(1, ((a.z+b.z)/2 + R) / (2*R)));
+          ctx.beginPath(); ctx.moveTo(a.sx,a.sy); ctx.lineTo(b.sx,b.sy);
+          ctx.strokeStyle = `rgba(232,185,48,${0.08+fade*0.18})`;
+          ctx.lineWidth = 0.6; ctx.stroke();
+        }
+      }
+      for (let lat = 1; lat < LATS; lat++) {
+        const phi = (lat / LATS) * Math.PI;
+        const pts = [];
+        for (let i = 0; i <= 32; i++) {
+          pts.push(project(spherePt((i/32)*Math.PI*2, phi, R), rotY, rotX));
+        }
+        for (let i = 0; i < pts.length - 1; i++) {
+          const a = pts[i], b = pts[i+1];
+          const fade = Math.max(0, Math.min(1, ((a.z+b.z)/2 + R) / (2*R)));
+          ctx.beginPath(); ctx.moveTo(a.sx,a.sy); ctx.lineTo(b.sx,b.sy);
+          ctx.strokeStyle = `rgba(255,248,231,${0.05+fade*0.12})`;
+          ctx.lineWidth = 0.5; ctx.stroke();
+        }
+      }
+    }
+
+    function drawGlow() {
+      const g = ctx.createRadialGradient(cx,cy,0,cx,cy,R*1.35);
+      g.addColorStop(0,  'rgba(232,185,48,0.18)');
+      g.addColorStop(0.5,'rgba(201,148,26,0.08)');
+      g.addColorStop(1,  'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(cx,cy,R*1.35,0,Math.PI*2);
+      ctx.fillStyle = g; ctx.fill();
+    }
+
+    function drawCore() {
+      const g = ctx.createRadialGradient(cx-R*0.25,cy-R*0.25,R*0.05,cx,cy,R);
+      g.addColorStop(0,   'rgba(255,255,230,0.97)');
+      g.addColorStop(0.18,'rgba(255,248,200,0.88)');
+      g.addColorStop(0.45,'rgba(232,185,48,0.60)');
+      g.addColorStop(0.8, 'rgba(160,112,18,0.25)');
+      g.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2);
+      ctx.fillStyle = g; ctx.fill();
+    }
+
+    function drawRing(ring, rotY, rotX, time) {
+      const steps = 80, back = [], front = [];
+      const angle = time * ring.speed;
+      for (let i = 0; i <= steps; i++) {
+        const a = (i/steps)*Math.PI*2 + angle;
+        const proj = project({
+          x: ring.rx * Math.cos(a),
+          y: ring.ry * Math.sin(a) * Math.sin(ring.tilt),
+          z: ring.ry * Math.sin(a) * Math.cos(ring.tilt)
+        }, rotY, rotX);
+        (proj.z > 0 ? front : back).push(proj);
+      }
+      [back, front].forEach((seg, isFront) => {
+        if (seg.length < 2) return;
+        ctx.beginPath(); ctx.moveTo(seg[0].sx, seg[0].sy);
+        for (let i = 1; i < seg.length; i++) ctx.lineTo(seg[i].sx, seg[i].sy);
+        ctx.strokeStyle = ring.color + (isFront ? 'cc' : '44');
+        ctx.lineWidth = isFront ? 1.5 : 0.8;
+        ctx.setLineDash(ring.dash); ctx.stroke(); ctx.setLineDash([]);
+      });
+    }
+
+    function drawNode(node, rotY, rotX, time) {
+      const ring = RINGS[node.ring];
+      const angle = time * ring.speed + node.phase;
+      const proj = project({
+        x: ring.rx * Math.cos(angle),
+        y: ring.ry * Math.sin(angle) * Math.sin(ring.tilt),
+        z: ring.ry * Math.sin(angle) * Math.cos(ring.tilt)
+      }, rotY, rotX);
+      const r = 14 * proj.scale;
+      ctx.beginPath(); ctx.arc(proj.sx, proj.sy, r, 0, Math.PI*2);
+      const ng = ctx.createRadialGradient(proj.sx-r*0.3, proj.sy-r*0.3, r*0.1, proj.sx, proj.sy, r);
+      ng.addColorStop(0,   '#fffce0');
+      ng.addColorStop(0.4,  node.col);
+      ng.addColorStop(1,   '#7a5210');
+      ctx.fillStyle = ng; ctx.fill();
+      ctx.strokeStyle = 'rgba(255,248,220,0.8)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = proj.z > 0 ? '#2a1800' : 'rgba(42,24,0,0.4)';
+      ctx.font = `${Math.round(8*proj.scale+3)}px sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(node.label, proj.sx, proj.sy);
+    }
+
+    function drawParticles(rotY, rotX) {
+      for (const p of PARTS) {
+        p.theta += p.speed;
+        const proj = project({
+          x: p.r * Math.sin(p.phi) * Math.cos(p.theta),
+          y: p.r * Math.cos(p.phi),
+          z: p.r * Math.sin(p.phi) * Math.sin(p.theta)
+        }, rotY, rotX);
+        const fade = Math.max(0, (proj.z + p.r) / (2*p.r)) * p.alpha;
+        const alpha = Math.round(fade*255).toString(16).padStart(2,'0');
+        ctx.beginPath(); ctx.arc(proj.sx, proj.sy, p.size*proj.scale, 0, Math.PI*2);
+        ctx.fillStyle = p.col + alpha; ctx.fill();
+      }
+    }
+
+    function drawDataStreams(rotY, rotX, time) {
+      for (let i = 0; i < 6; i++) {
+        const theta = (i/6)*Math.PI*2 + time*0.003*(i%2===0?1:-1);
+        const phi = Math.PI*0.3 + i*0.18;
+        const r1 = R*0.95, r2 = R*1.5 + i*8;
+        const a = project({ x:r1*Math.sin(phi)*Math.cos(theta), y:r1*Math.cos(phi), z:r1*Math.sin(phi)*Math.sin(theta) }, rotY, rotX);
+        const b = project({ x:r2*Math.sin(phi)*Math.cos(theta), y:r2*Math.cos(phi), z:r2*Math.sin(phi)*Math.sin(theta) }, rotY, rotX);
+        const alpha = (0.15 + 0.1*Math.sin(time*0.04+i)).toFixed(2);
+        ctx.beginPath(); ctx.moveTo(a.sx,a.sy); ctx.lineTo(b.sx,b.sy);
+        ctx.strokeStyle = `rgba(245,213,110,${alpha})`;
+        ctx.lineWidth = 0.8; ctx.setLineDash([4,6]); ctx.stroke(); ctx.setLineDash([]);
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      t++;
+      const rotY = t*0.008 + mouse.x*0.5;
+      const rotX = mouse.y*0.4 - 0.1;
+
+      drawGlow();
+      drawDataStreams(rotY, rotX, t);
+      drawParticles(rotY, rotX);
+      // for (const ring of RINGS) drawRing(ring, rotY, rotX, t);
+      drawSphere(rotY, rotX);
+      drawCore();
+      // for (const ring of RINGS) drawRing(ring, rotY, rotX, t);
+      for (const node of NODES) drawNode(node, rotY, rotX, t);
+
+      const ch = ctx.createRadialGradient(cx-22,cy-22,2,cx,cy,55);
+      ch.addColorStop(0,'rgba(255,255,240,0.55)');
+      ch.addColorStop(1,'rgba(255,255,240,0)');
+      ctx.beginPath(); ctx.arc(cx,cy,55,0,Math.PI*2);
+      ctx.fillStyle = ch; ctx.fill();
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
   })();
 });
