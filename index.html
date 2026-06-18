@@ -1,1965 +1,648 @@
-/* ============================================================
-   PORTFOLIO — Premium Dark Theme Stylesheet
-   Inspired by paralleluniverse.com.ua
-   ============================================================ */
-
-/* ------------------------------------------------------------ 
-   0. Design Tokens (CSS Custom Properties)
-   ------------------------------------------------------------ */
-:root {
-  /* Backgrounds */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #111118;
-  --bg-card: #16161e;
-  --bg-card-hover: #1c1c26;
-
-  /* Typography Colors */
-  --text-primary: #e8e2d6;
-  --text-secondary: #9a9484;
-  --text-muted: #5a5650;
-
-  /* Accent Colors */
-  --accent-gold: #c9a96e;
-  --accent-gold-dim: rgba(201, 169, 110, 0.15);
-  --accent-lavender: #8b7ec8;
-  --accent-lavender-dim: rgba(139, 126, 200, 0.1);
-
-  /* Borders */
-  --border-color: rgba(232, 226, 214, 0.08);
-  --border-color-hover: rgba(232, 226, 214, 0.15);
-
-  /* Typography */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
-
-  /* Motion */
-  --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ------------------------------------------------------------ 
-   1. Global Reset & Base Styles
-   ------------------------------------------------------------ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  background: var(--bg-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
-  background: var(--bg-primary);
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul, ol {
-  list-style: none;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: inherit;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent-gold);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #d4b577;
-}
-
-/* Firefox scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent-gold) var(--bg-primary);
-}
-
-/* Selection */
-::selection {
-  background: var(--accent-gold);
-  color: var(--bg-primary);
-}
-
-::-moz-selection {
-  background: var(--accent-gold);
-  color: var(--bg-primary);
-}
-
-/* ------------------------------------------------------------ 
-   2. Preloader
-   ------------------------------------------------------------ */
-#preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: var(--bg-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-
-.preloader-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.preloader-logo {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  color: var(--accent-gold);
-  font-weight: 700;
-  letter-spacing: 2px;
-  animation: fadeIn 1s ease-out forwards;
-}
-
-.preloader-logo::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  border-top-color: var(--accent-gold);
-  border-right-color: rgba(201, 169, 110, 0.3);
-  animation: preloaderSpin 1.5s linear infinite;
-}
-
-@keyframes preloaderSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.preloader--hidden {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-
-/* ------------------------------------------------------------ 
-   3. Navigation
-   ------------------------------------------------------------ */
-#navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  padding: 1.2rem 3rem;
-  background: transparent;
-  transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
-  border-bottom: 1px solid transparent;
-}
-
-.nav-scrolled {
-  background: rgba(10, 10, 15, 0.85) !important;
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-bottom-color: var(--border-color) !important;
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-logo {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: 0.15em;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.nav-logo:hover {
-  color: var(--accent-gold);
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.nav-links a {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--text-secondary);
-  text-decoration: none;
-  position: relative;
-  padding-bottom: 4px;
-  transition: color 0.3s ease;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent-gold);
-  transition: width 0.4s var(--transition-smooth);
-}
-
-.nav-links a:hover {
-  color: var(--text-primary);
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-.nav-links a.active {
-  color: var(--text-primary);
-}
-
-.nav-links a.active::after {
-  width: 100%;
-}
-
-.nav-socials {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.nav-socials a {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.nav-socials a:hover {
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(201, 169, 110, 0.1);
-}
-
-.nav-socials a svg {
-  width: 16px;
-  height: 16px;
-  stroke: currentColor;
-  fill: none;
-}
-
-/* Hamburger Toggle */
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  gap: 5px;
-  background: none;
-  border: none;
-  padding: 0;
-  z-index: 1001;
-}
-
-.nav-toggle span {
-  display: block;
-  width: 22px;
-  height: 1.5px;
-  background: var(--text-primary);
-  transition: transform 0.4s var(--transition-smooth), opacity 0.3s ease;
-  transform-origin: center;
-}
-
-.nav-toggle.active span:nth-child(1) {
-  transform: translateY(6.5px) rotate(45deg);
-}
-
-.nav-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.nav-toggle.active span:nth-child(3) {
-  transform: translateY(-6.5px) rotate(-45deg);
-}
-
-/* Mobile Menu */
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  background: var(--bg-primary);
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transform: translateX(100%);
-  transition: transform 0.5s var(--transition-smooth);
-}
-
-.mobile-menu.active {
-  transform: translateX(0);
-}
-
-.mobile-menu-links {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.mobile-menu-links a {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--text-secondary);
-  text-decoration: none;
-  position: relative;
-  padding-bottom: 4px;
-  transition: color 0.3s ease;
-}
-
-.mobile-menu-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent-gold);
-  transition: width 0.4s var(--transition-smooth);
-}
-
-.mobile-menu-links a:hover {
-  color: var(--text-primary);
-}
-
-.mobile-menu-links a:hover::after {
-  width: 100%;
-}
-
-.mobile-menu-links a.active {
-  color: var(--text-primary);
-}
-
-.mobile-menu-socials {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 3rem;
-}
-
-.mobile-menu-socials a {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: border-color 0.3s ease, color 0.3s ease;
-}
-
-.mobile-menu-socials a:hover {
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
-}
-
-.mobile-menu-socials a svg {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  fill: none;
-}
-
-/* ------------------------------------------------------------ 
-   4. Hero
-   ------------------------------------------------------------ */
-#hero {
-  min-height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.hero-bg canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  max-width: 900px;
-  padding: 2rem;
-}
-
-.hero-greeting {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-  animation: fadeIn 0.8s 0.3s ease both;
-}
-
-.hero-name {
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  animation: slideUp 0.8s 0.5s var(--transition-smooth) both;
-}
-
-.hero-name span {
-  color: var(--text-primary);
-}
-
-.hero-name .highlight {
-  color: var(--accent-gold);
-  font-style: italic;
-}
-
-.hero-tagline {
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  color: var(--accent-gold);
-  margin-bottom: 2rem;
-  min-height: 1.6em;
-  font-family: var(--font-body);
-  animation: fadeIn 0.8s 0.8s ease both;
-}
-
-.hero-tagline .cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1.1em;
-  background: var(--accent-gold);
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: blink 1s step-end infinite;
-}
-
-.hero-description {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  max-width: 650px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.8;
-  animation: fadeIn 0.8s 1s ease both;
-}
-
-.hero-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  animation: fadeIn 0.8s 1.2s ease both;
-}
-
-.hero-cta a {
-  padding: 0.85rem 2.2rem;
-  border-radius: 2px;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  text-decoration: none;
-  transition: all 0.4s var(--transition-smooth);
-  font-family: var(--font-body);
-  font-weight: 500;
-}
-
-.btn-primary {
-  background: transparent;
-  border: 1px solid var(--accent-gold);
-  color: var(--accent-gold);
-}
-
-.btn-primary:hover {
-  background: var(--accent-gold);
-  color: var(--bg-primary);
-  box-shadow: 0 0 20px rgba(201, 169, 110, 0.4);
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-}
-
-.btn-secondary:hover {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  animation: fadeIn 1s 1.8s ease both;
-}
-
-@media (min-width: 1025px) {
-  .hero-content {
-    text-align: left;
-    max-width: 650px;
-    margin-right: auto;
-    margin-left: 8%;
-  }
-  .hero-cta {
-    justify-content: flex-start;
-  }
-}
-
-/* ------------------------------------------------------------ 
-   3D Data Intelligence Core (Canvas)
-   ------------------------------------------------------------ */
-#canvas-wrap {
-  position: absolute;
-  right: 2%;
-  top: 40%;
-  transform: translateY(-50%);
-  width: 600px;
-  height: 520px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  pointer-events: none;
-}
-
-@media (max-width: 1024px) {
-  #canvas-wrap {
-    right: 50%;
-    transform: translate(50%, -50%) scale(0.6);
-    opacity: 0.25; /* Behind text on smaller screens */
-    z-index: 0;
-  }
-}
-
-canvas { 
-  display: block; 
-}
-
-.scroll-indicator .line {
-  width: 1px;
-  height: 40px;
-  background: var(--accent-gold);
-  animation: scroll-pulse 2s ease-in-out infinite;
-}
-
-.scroll-indicator span {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--text-muted);
-}
-
-/* ------------------------------------------------------------ 
-   5. Shared Section Styles
-   ------------------------------------------------------------ */
-.section {
-  padding: 8rem 3rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.section-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.section-header {
-  margin-bottom: 4rem;
-}
-
-.section-number {
-  font-size: 0.75rem;
-  color: var(--accent-gold);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  font-family: var(--font-body);
-  font-weight: 500;
-}
-
-.section-header h2 {
-  font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-}
-
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
-  margin: 6rem auto;
-  max-width: 200px;
-  position: relative;
-  z-index: 1;
-  border: none;
-}
-
-/* ------------------------------------------------------------ 
-   6. About
-   ------------------------------------------------------------ */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-.about-bio {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.9;
-}
-
-.about-bio p {
-  margin-bottom: 1.5rem;
-}
-
-.about-bio p:last-child {
-  margin-bottom: 0;
-}
-
-/* Education Timeline */
-.education-timeline {
-  position: relative;
-  padding-left: 2rem;
-}
-
-.education-timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 1px;
-  background: var(--border-color);
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 3rem;
-  padding-left: 1.5rem;
-}
-
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -2.05rem;
-  top: 0.5rem;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-gold);
-  box-shadow: 0 0 10px var(--accent-gold-dim), 0 0 20px rgba(201, 169, 110, 0.08);
-}
-
-.timeline-content h3 {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.timeline-institution {
-  font-size: 0.85rem;
-  color: var(--accent-gold);
-  font-style: italic;
-  margin-bottom: 0.75rem;
-}
-
-.timeline-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-.timeline-meta span {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.timeline-details {
-  list-style: none;
-}
-
-.timeline-details li {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  padding: 0.25rem 0;
-  padding-left: 1rem;
-  position: relative;
-  line-height: 1.7;
-}
-
-.timeline-details li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--text-muted);
-}
-
-/* ------------------------------------------------------------ 
-   7. Experience
-   ------------------------------------------------------------ */
-.experience-card {
-  position: relative;
-  overflow: hidden;
-  padding: 2.5rem;
-  transition: var(--transition-smooth);
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-}
-
-.experience-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: var(--accent-gold);
-}
-
-.experience-card:hover {
-  transform: perspective(1000px) translateY(-5px) rotateX(2deg) rotateY(-1deg);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border-color: rgba(201, 169, 110, 0.3);
-}
-
-.experience-header {
-  margin-bottom: 2rem;
-}
-
-.experience-header h3 {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.experience-company {
-  font-size: 0.9rem;
-  color: var(--accent-gold);
-}
-
-.experience-duration {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.experience-details {
-  list-style: none;
-}
-
-.experience-details li {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-color);
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-.experience-details li:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.experience-details li:first-child {
-  padding-top: 0;
-}
-
-.experience-details li strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-/* ------------------------------------------------------------ 
-   8. Skills
-   ------------------------------------------------------------ */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.5rem;
-}
-
-.skill-category {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.skill-category:hover {
-  transform: perspective(1000px) scale(1.02) rotateX(2deg);
-  border-color: rgba(201, 169, 110, 0.3);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.skill-category-header {
-  padding: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.skill-category-header:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.skill-category-header h3 {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.skill-count {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  background: var(--bg-secondary);
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-family: var(--font-body);
-  flex-shrink: 0;
-}
-
-.skill-tags {
-  padding: 0 1.5rem 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.skill-tag {
-  font-size: 0.75rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: 2px;
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  white-space: nowrap;
-  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease, opacity 0.5s ease, transform 0.5s var(--transition-smooth);
-  cursor: default;
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.skill-tag--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.skill-tag:hover {
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
-  background: var(--accent-gold-dim);
-}
-
-/* ------------------------------------------------------------ 
-   9. Projects
-   ------------------------------------------------------------ */
-.project-group {
-  margin-bottom: 4rem;
-}
-
-.project-group:last-child {
-  margin-bottom: 0;
-}
-
-.project-group-title {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--accent-gold);
-  margin-bottom: 2rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-color);
-  font-weight: 500;
-}
-
-.project-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 1.5rem;
-}
-
-.project-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 2rem;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.project-card:hover {
-  transform: perspective(1000px) translateY(-10px) scale(1.01) rotateX(3deg) rotateY(-2deg);
-  border-color: rgba(201, 169, 110, 0.5);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-}
-
-.project-card-header {
-  margin-bottom: 1rem;
-  padding-right: 2.5rem;
-}
-
-.project-card-title {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.project-card-focus {
-  font-size: 0.75rem;
-  color: var(--accent-lavender);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.project-card-skills {
-  margin-top: 0.75rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.project-card-skills span {
-  font-size: 0.65rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 2px;
-  background: var(--accent-lavender-dim);
-  color: var(--accent-lavender);
-  font-weight: 500;
-}
-
-/* Expandable Body */
-.project-card-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s var(--transition-smooth);
-}
-
-.project-card.expanded .project-card-body {
-  max-height: 500px;
-}
-
-.project-card-body ul {
-  list-style: none;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.project-card-body li {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  padding: 0.4rem 0;
-  line-height: 1.7;
-}
-
-.project-card-body li strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-/* Toggle Button */
-.project-card-toggle {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.3s ease, color 0.3s ease, transform 0.4s var(--transition-smooth);
-  line-height: 1;
-}
-
-.project-card-toggle:hover {
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
-}
-
-.project-card.expanded .project-card-toggle {
-  transform: rotate(45deg);
-}
-
-/* ------------------------------------------------------------ 
-   10. Certifications
-   ------------------------------------------------------------ */
-.cert-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 0.75rem;
-}
-
-.cert-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  gap: 1rem;
-  transition: all 0.3s ease;
-}
-
-.cert-item:hover {
-  border-color: rgba(201, 169, 110, 0.5);
-  transform: perspective(800px) scale(1.02) rotateX(3deg) translateX(4px);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.cert-name {
-  font-size: 0.85rem;
-  color: var(--text-primary);
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.cert-issuer {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-/* ------------------------------------------------------------ 
-   11. Contact
-   ------------------------------------------------------------ */
-.contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.contact-text h3 {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.contact-text p {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.contact-item:hover {
-  border-color: rgba(201, 169, 110, 0.5);
-  transform: perspective(800px) translateX(10px) rotateY(-4deg);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.contact-item .contact-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--accent-gold-dim);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: background 0.3s ease;
-}
-
-.contact-item:hover .contact-icon {
-  background: rgba(201, 169, 110, 0.25);
-}
-
-.contact-item .contact-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--accent-gold);
-  fill: none;
-}
-
-.contact-item .contact-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  margin-bottom: 0.2rem;
-}
-
-.contact-item .contact-value {
-  font-size: 0.9rem;
-  color: var(--text-primary);
-}
-
-/* ------------------------------------------------------------ 
-   12. Footer
-   ------------------------------------------------------------ */
-.footer {
-  padding: 3rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-left {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-.footer-right {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-/* ------------------------------------------------------------ 
-   13. Cursor Glow
-   ------------------------------------------------------------ */
-.cursor-glow {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(circle, rgba(201, 169, 110, 0.06) 0%, transparent 70%);
-  transition: transform 0.15s ease-out, opacity 0.3s ease;
-  transform: translate(-50%, -50%);
-  will-change: transform;
-}
-
-/* ------------------------------------------------------------ 
-   14. Reveal Animations
-   ------------------------------------------------------------ */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
-}
-
-.reveal--visible {
-  opacity: 1;
-  transform: translateY(0) translateX(0);
-}
-
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
-.reveal-left.reveal--visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-.reveal-right.reveal--visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Stagger Delays */
-.reveal-delay-1 {
-  transition-delay: 0.1s;
-}
-
-.reveal-delay-2 {
-  transition-delay: 0.2s;
-}
-
-.reveal-delay-3 {
-  transition-delay: 0.3s;
-}
-
-.reveal-delay-4 {
-  transition-delay: 0.4s;
-}
-
-.reveal-delay-5 {
-  transition-delay: 0.5s;
-}
-
-/* ------------------------------------------------------------ 
-   15. Keyframes
-   ------------------------------------------------------------ */
-@keyframes blink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes scroll-pulse {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-  50% {
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-  51% {
-    transform-origin: bottom;
-  }
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes preloaderFade {
-  0% {
-    opacity: 0;
-    letter-spacing: 0.5em;
-  }
-  100% {
-    opacity: 1;
-    letter-spacing: 0.3em;
-  }
-}
-
-@keyframes lineGrow {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-/* ------------------------------------------------------------ 
-   16. Responsive — Tablet (≤ 1024px)
-   ------------------------------------------------------------ */
-@media (max-width: 1024px) {
-  .about-grid,
-  .contact-content {
-    grid-template-columns: 1fr;
-  }
-
-  .section {
-    padding: 5rem 2rem;
-  }
-
-  .about-grid {
-    gap: 3rem;
-  }
-
-  .contact-content {
-    gap: 3rem;
-  }
-}
-
-/* ------------------------------------------------------------ 
-   17. Responsive — Mobile (≤ 768px)
-   ------------------------------------------------------------ */
-@media (max-width: 768px) {
-  .nav-links,
-  .nav-socials {
-    display: none;
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-
-  #navbar {
-    padding: 1rem 1.5rem;
-  }
-
-  .section {
-    padding: 4rem 1.25rem;
-  }
-
-  .section-header {
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-cta {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero-cta a {
-    width: 100%;
-    max-width: 280px;
-    text-align: center;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .cert-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cursor-glow {
-    display: none;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  .experience-card {
-    padding: 1.5rem;
-  }
-
-  .scroll-indicator {
-    bottom: 1.5rem;
-  }
-}
-
-/* ------------------------------------------------------------ 
-   18. Prefers Reduced Motion
-   ------------------------------------------------------------ */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .reveal,
-  .reveal-left,
-  .reveal-right {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ============================================================
-   SPACE ELEMENTS — Starfield & Solar System Planets
-   ============================================================ */
-
-/* --- Global Starfield Canvas --- */
-#starfield {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Ensure all content sits above the starfield */
-#preloader { z-index: 9999; }
-#navbar { z-index: 1000; }
-.mobile-menu { z-index: 999; }
-main, .footer { position: relative; z-index: 1; }
-
-/* --- Planet Base Styles --- */
-.planet {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-}
-
-/* Sections need relative positioning for planet placement */
-.section { position: relative; overflow: visible; }
-
-/* --- Shooting Stars --- */
-.shooting-star {
-  position: fixed;
-  width: 100px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  animation: shootingStar 1.5s ease-in forwards;
-}
-
-@keyframes shootingStar {
-  0% {
-    opacity: 0;
-    transform: rotate(var(--angle)) translateX(0);
-  }
-  5% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 0;
-    transform: rotate(var(--angle)) translateX(-1200px);
-  }
-}
-
-/* ============================================================
-   PLANET DESIGNS — Pure CSS Realistic Planets
-   ============================================================ */
-
-/* --- Mercury --- */
-.planet-mercury {
-  width: 30px;
-  height: 30px;
-  background: radial-gradient(circle at 35% 35%,
-    #d4c5a9 0%,
-    #a89880 30%,
-    #7a6e5d 60%,
-    #5c5346 100%);
-  box-shadow:
-    inset -6px -4px 10px rgba(0,0,0,0.5),
-    inset 3px 3px 8px rgba(255,255,255,0.1),
-    0 0 15px rgba(168, 152, 128, 0.15);
-  top: 15%;
-  right: 8%;
-  animation: planetFloat1 18s ease-in-out infinite;
-  opacity: 0.6;
-}
-
-/* --- Venus --- */
-.planet-venus {
-  width: 45px;
-  height: 45px;
-  background: radial-gradient(circle at 40% 35%,
-    #f2d9a0 0%,
-    #e8c577 25%,
-    #d4a84b 50%,
-    #b8862d 75%,
-    #8c6422 100%);
-  box-shadow:
-    inset -10px -6px 18px rgba(0,0,0,0.45),
-    inset 4px 4px 10px rgba(255,255,255,0.15),
-    0 0 25px rgba(228, 197, 119, 0.15),
-    0 0 60px rgba(228, 197, 119, 0.06);
-  top: 60%;
-  left: 5%;
-  animation: planetFloat2 22s ease-in-out infinite;
-  opacity: 0.5;
-}
-
-/* Atmosphere haze for Venus */
-.planet-venus::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%,
-    rgba(242, 217, 160, 0.15) 0%,
-    transparent 70%);
-}
-
-/* --- Earth --- */
-.planet-earth {
-  width: 55px;
-  height: 55px;
-  background: radial-gradient(circle at 38% 32%,
-    #6db3f2 0%,
-    #4a90d9 15%,
-    #2d7bc9 30%,
-    #3a8e4f 35%,
-    #2d7bc9 45%,
-    #1a5ea0 60%,
-    #3a8e4f 65%,
-    #1a5ea0 80%,
-    #0d3b6e 100%);
-  box-shadow:
-    inset -12px -8px 20px rgba(0,0,0,0.5),
-    inset 5px 5px 12px rgba(255,255,255,0.15),
-    0 0 30px rgba(77, 144, 217, 0.2),
-    0 0 80px rgba(77, 144, 217, 0.08);
-  top: 20%;
-  left: 3%;
-  animation: planetFloat3 25s ease-in-out infinite;
-  opacity: 0.55;
-}
-
-/* Earth atmosphere glow */
-.planet-earth::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 38% 32%,
-    rgba(109, 179, 242, 0.2) 0%,
-    rgba(109, 179, 242, 0.08) 50%,
-    transparent 70%);
-}
-
-/* Earth clouds overlay */
-.planet-earth::after {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse at 25% 30%, rgba(255,255,255,0.25) 0%, transparent 30%),
-    radial-gradient(ellipse at 65% 55%, rgba(255,255,255,0.2) 0%, transparent 25%),
-    radial-gradient(ellipse at 45% 75%, rgba(255,255,255,0.15) 0%, transparent 20%);
-  animation: cloudsDrift 30s linear infinite;
-}
-
-@keyframes cloudsDrift {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* --- Mars --- */
-.planet-mars {
-  width: 38px;
-  height: 38px;
-  background: radial-gradient(circle at 36% 34%,
-    #e8a07a 0%,
-    #d4744a 25%,
-    #c45e33 50%,
-    #a04525 75%,
-    #7a3018 100%);
-  box-shadow:
-    inset -8px -6px 14px rgba(0,0,0,0.5),
-    inset 3px 3px 8px rgba(255,255,255,0.1),
-    0 0 20px rgba(196, 94, 51, 0.15);
-  top: 12%;
-  right: 6%;
-  animation: planetFloat1 20s ease-in-out infinite;
-  animation-delay: -5s;
-  opacity: 0.5;
-}
-
-/* Mars polar cap */
-.planet-mars::before {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14px;
-  height: 6px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(230,220,210,0.35) 0%, transparent 70%);
-}
-
-/* --- Jupiter --- */
-.planet-jupiter {
-  width: 90px;
-  height: 90px;
-  background:
-    repeating-linear-gradient(175deg,
-      #d4a86a 0px, #d4a86a 4px,
-      #c4935a 4px, #c4935a 8px,
-      #e8c088 8px, #e8c088 11px,
-      #b07840 11px, #b07840 15px,
-      #d4a86a 15px, #d4a86a 17px,
-      #a06835 17px, #a06835 22px,
-      #e0b878 22px, #e0b878 25px,
-      #c49055 25px, #c49055 30px);
-  border-radius: 50%;
-  box-shadow:
-    inset -20px -10px 30px rgba(0,0,0,0.45),
-    inset 8px 8px 20px rgba(255,255,255,0.1),
-    0 0 40px rgba(212, 168, 106, 0.12),
-    0 0 100px rgba(212, 168, 106, 0.05);
-  bottom: 10%;
-  right: 4%;
-  animation: planetFloat2 30s ease-in-out infinite;
-  animation-delay: -8s;
-  opacity: 0.4;
-}
-
-/* Jupiter Great Red Spot */
-.planet-jupiter::before {
-  content: '';
-  position: absolute;
-  top: 55%;
-  left: 30%;
-  width: 16px;
-  height: 10px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse,
-    #c45533 0%,
-    #a04028 60%,
-    transparent 100%);
-  box-shadow: 0 0 4px rgba(196, 85, 51, 0.3);
-}
-
-/* --- Saturn --- */
-.planet-saturn {
-  width: 70px;
-  height: 70px;
-  background: radial-gradient(circle at 38% 35%,
-    #f0dca8 0%,
-    #dfc888 20%,
-    #ccae6a 45%,
-    #b8944c 70%,
-    #9a7a38 100%);
-  box-shadow:
-    inset -16px -8px 25px rgba(0,0,0,0.45),
-    inset 6px 6px 14px rgba(255,255,255,0.12),
-    0 0 35px rgba(204, 174, 106, 0.12),
-    0 0 80px rgba(204, 174, 106, 0.05);
-  top: 15%;
-  right: 10%;
-  animation: planetFloat3 28s ease-in-out infinite;
-  animation-delay: -12s;
-  opacity: 0.45;
-}
-
-/* Saturn's rings */
-.planet-saturn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 130px;
-  height: 30px;
-  transform: translate(-50%, -50%) rotateX(75deg);
-  border-radius: 50%;
-  border: 5px solid transparent;
-  background: transparent;
-  box-shadow:
-    0 0 0 3px rgba(204, 186, 140, 0.25),
-    0 0 0 7px rgba(204, 186, 140, 0.15),
-    0 0 0 12px rgba(204, 186, 140, 0.08),
-    0 0 0 16px rgba(204, 186, 140, 0.04);
-}
-
-/* Saturn ring detail */
-.planet-saturn::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120px;
-  height: 26px;
-  transform: translate(-50%, -50%) rotateX(75deg);
-  border-radius: 50%;
-  border: 2px solid rgba(180, 160, 110, 0.2);
-  box-shadow: 0 0 0 5px rgba(180, 160, 110, 0.06);
-}
-
-/* --- Neptune --- */
-.planet-neptune {
-  width: 50px;
-  height: 50px;
-  background: radial-gradient(circle at 38% 33%,
-    #5b8dd9 0%,
-    #3a6cb8 25%,
-    #2850a0 50%,
-    #1a3a80 75%,
-    #0f2560 100%);
-  box-shadow:
-    inset -12px -8px 18px rgba(0,0,0,0.5),
-    inset 4px 4px 10px rgba(255,255,255,0.12),
-    0 0 25px rgba(58, 108, 184, 0.18),
-    0 0 60px rgba(58, 108, 184, 0.07);
-  bottom: 20%;
-  left: 6%;
-  animation: planetFloat1 24s ease-in-out infinite;
-  animation-delay: -3s;
-  opacity: 0.45;
-}
-
-/* Neptune's faint bands */
-.planet-neptune::before {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  border-radius: 50%;
-  background:
-    linear-gradient(170deg,
-      transparent 20%,
-      rgba(100, 160, 220, 0.15) 30%,
-      transparent 40%,
-      rgba(100, 160, 220, 0.1) 55%,
-      transparent 65%);
-}
-
-/* --- Uranus --- */
-.planet-uranus {
-  width: 42px;
-  height: 42px;
-  background: radial-gradient(circle at 40% 35%,
-    #a8dce6 0%,
-    #7cc4d4 25%,
-    #5aabb8 50%,
-    #3d8e9c 75%,
-    #2a7080 100%);
-  box-shadow:
-    inset -10px -6px 16px rgba(0,0,0,0.4),
-    inset 4px 4px 8px rgba(255,255,255,0.15),
-    0 0 20px rgba(90, 171, 184, 0.15);
-  top: 30%;
-  right: 3%;
-  animation: planetFloat2 26s ease-in-out infinite;
-  animation-delay: -7s;
-  opacity: 0.4;
-}
-
-/* ============================================================
-   PLANET FLOAT ANIMATIONS
-   ============================================================ */
-
-@keyframes planetFloat1 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  25% { transform: translateY(-12px) translateX(5px); }
-  50% { transform: translateY(-5px) translateX(-8px); }
-  75% { transform: translateY(-15px) translateX(3px); }
-}
-
-@keyframes planetFloat2 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  30% { transform: translateY(-10px) translateX(-6px); }
-  60% { transform: translateY(-18px) translateX(4px); }
-  80% { transform: translateY(-6px) translateX(-3px); }
-}
-
-@keyframes planetFloat3 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  20% { transform: translateY(-8px) translateX(7px); }
-  45% { transform: translateY(-20px) translateX(-5px); }
-  70% { transform: translateY(-10px) translateX(10px); }
-}
-
-/* ============================================================
-   RESPONSIVE — Hide/shrink planets on small screens
-   ============================================================ */
-
-@media (max-width: 1024px) {
-  .planet { opacity: 0.3 !important; }
-  .planet-jupiter { width: 60px; height: 60px; }
-  .planet-saturn { width: 50px; height: 50px; }
-  .planet-saturn::before { width: 95px; height: 22px; }
-  .planet-saturn::after { width: 88px; height: 20px; }
-}
-
-@media (max-width: 768px) {
-  .planet { opacity: 0.25 !important; }
-  .planet-mercury { width: 20px; height: 20px; }
-  .planet-venus { width: 30px; height: 30px; }
-  .planet-earth { width: 38px; height: 38px; }
-  .planet-mars { width: 25px; height: 25px; }
-  .planet-jupiter { width: 50px; height: 50px; }
-  .planet-saturn { width: 40px; height: 40px; }
-  .planet-saturn::before { width: 75px; height: 18px; }
-  .planet-saturn::after { width: 68px; height: 16px; }
-  .planet-neptune { width: 32px; height: 32px; }
-  .planet-uranus { width: 28px; height: 28px; }
-}
-
-/* ============================================================
-   CROSSHAIR LINES — Follow Mouse / Touch
-   ============================================================ */
-
-.crosshair {
-  position: fixed;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  will-change: transform, top, left;
-}
-
-.crosshair-h {
-  left: 0;
-  width: 100vw;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(201, 169, 110, 0.15) 10%,
-    rgba(201, 169, 110, 0.5) 35%,
-    rgba(201, 169, 110, 0.7) 50%,
-    rgba(201, 169, 110, 0.5) 65%,
-    rgba(201, 169, 110, 0.15) 90%,
-    transparent 100%);
-  box-shadow: 0 0 6px rgba(201, 169, 110, 0.25);
-}
-
-.crosshair-v {
-  top: 0;
-  width: 1px;
-  height: 100vh;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    rgba(201, 169, 110, 0.15) 10%,
-    rgba(201, 169, 110, 0.5) 35%,
-    rgba(201, 169, 110, 0.7) 50%,
-    rgba(201, 169, 110, 0.5) 65%,
-    rgba(201, 169, 110, 0.15) 90%,
-    transparent 100%);
-  box-shadow: 0 0 6px rgba(201, 169, 110, 0.25);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Wasim Mahmud — Data Analyst Portfolio</title>
+    <meta name="description" content="Data Analyst with 1+ year of experience in data analysis, ETL pipelines, and dashboard reporting. Proficient in SQL, Python, Excel, and Power BI for data cleaning, modeling, and visualization.">
+    <meta name="author" content="Syed Wasim Mahmud">
+    <meta property="og:title" content="Syed Wasim Mahmud — Data Analyst Portfolio">
+    <meta property="og:description" content="Passionate About Analytics | Storyteller with Data | Turning Data into Actionable Business Insights">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== STARFIELD BACKGROUND ===== -->
+    <canvas id="starfield"></canvas>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">WM</div>
+        </div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">WM</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-socials">
+                <a href="https://linkedin.com/in/wasim-mahmud266" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://github.com/kevinnn-git" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-inner">
+            <div class="mobile-menu-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="mobile-menu-socials">
+                <a href="https://linkedin.com/in/wasim-mahmud266" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://github.com/kevinnn-git" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+
+        <!-- ===== HERO ===== -->
+        <section id="hero" class="section hero">
+            <div class="hero-bg">
+                <canvas id="hero-canvas"></canvas>
+            </div>
+            <!-- Space Planets -->
+            <div class="planet planet-mercury"></div>
+
+            <!-- 3D Data Intelligence Core (Canvas) -->
+            <div id="canvas-wrap">
+                <canvas id="c"></canvas>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-greeting reveal">Hello, I'm</div>
+                <h1 class="hero-name reveal reveal-delay-1">
+                    <span>Syed Wasim</span> <span class="highlight">Mahmud</span>
+                </h1>
+                <div class="hero-tagline reveal reveal-delay-2"></div>
+                <p class="hero-description reveal reveal-delay-3">
+                    Data Analyst with 1+ year of experience in data analysis, ETL pipelines, and dashboard reporting. Proficient in SQL, Python, Excel, and Power BI for data cleaning, modeling, and visualization. Passionate about leveraging analytics and Generative AI to drive data-driven business decisions.
+                </p>
+                <div class="hero-cta reveal reveal-delay-4">
+                    <a href="#projects" class="btn-primary">View Projects</a>
+                    <a href="#contact" class="btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="line"></div>
+                <span>Scroll</span>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT & EDUCATION ===== -->
+        <section id="about" class="section">
+            <div class="planet planet-earth"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">01</div>
+                    <h2>About & Education</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-bio reveal">
+                        <p>Data Analyst | Passionate About Analytics | Storyteller with Data | Turning Data into Actionable Business Insights | Passionate About Gen AI | (SQL, Power BI, Python, Excel)</p>
+                        <p>Data Analyst with 1+ year of experience in data analysis, ETL pipelines, and dashboard reporting. Proficient in SQL, Python, Excel, and Power BI for data cleaning, modeling, and visualization. Passionate about leveraging analytics and Generative AI to drive data-driven business decisions.</p>
+                    </div>
+                    <div class="education-timeline">
+                        <div class="timeline-item reveal reveal-right">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Bachelor of Computer Applications (BCA)</h3>
+                                <div class="timeline-institution">University of Science & Technology, Meghalaya (USTM)</div>
+                                <div class="timeline-meta">
+                                    <span>Jul 2022 – Jul 2025</span>
+                                    <span>Grade: A</span>
+                                </div>
+                                <ul class="timeline-details">
+                                    <li>Specialization: Data Analytics</li>
+                                    <li>Electives: Business Administration</li>
+                                    <li>Core Skills: Data Analytics, Digital Communication</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal reveal-right reveal-delay-2">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Higher Secondary (12th Standard)</h3>
+                                <div class="timeline-institution">Pragjyotika Senior Secondary School</div>
+                                <div class="timeline-meta">
+                                    <span>2020 – 2022</span>
+                                    <span>Stream: Arts</span>
+                                    <span>Grade: A</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== EXPERIENCE ===== -->
+        <section id="experience" class="section">
+            <div class="planet planet-venus"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">02</div>
+                    <h2>Experience</h2>
+                </div>
+                <div class="experience-card reveal">
+                    <div class="experience-card-inner">
+                        <div class="experience-header">
+                            <h3>Market Research Analyst</h3>
+                            <div class="experience-company">Syync · Full-time (Remote — Hyderabad, Telangana, India)</div>
+                            <div class="experience-duration">Jan 2025 – Mar 2026 · 1 year 3 months</div>
+                        </div>
+                        <ul class="experience-details">
+                            <li><strong>Data Engineering & Scraping:</strong> Extracted, scraped, and structured high-volume market intelligence data on brands, SKUs, digital influencers, and emerging growth signals from diverse public web sources.</li>
+                            <li><strong>Data Quality & Validation:</strong> Developed rigorous data cleaning workflows, systematically handling missing values, calculating uncertainty metrics, and establishing strict data exclusion rules to ensure production-grade dataset accuracy.</li>
+                            <li><strong>Business Intelligence:</strong> Built interactive, analytical dashboards to monitor, baseline, and benchmark brand performance and competitive market trends, translating raw data into actionable insights for corporate decision-makers.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== SKILLS ===== -->
+        <section id="skills" class="section">
+            <div class="planet planet-mars"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">03</div>
+                    <h2>Skills</h2>
+                </div>
+                <div class="skills-grid">
+
+                    <!-- AI & Machine Learning -->
+                    <div class="skill-category reveal">
+                        <div class="skill-category-header">
+                            <h3>AI & Machine Learning</h3>
+                            <span class="skill-count">13</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Science</span>
+                            <span class="skill-tag">AI Agents</span>
+                            <span class="skill-tag">Google Agent Development Kit (ADK)</span>
+                            <span class="skill-tag">Generative AI</span>
+                            <span class="skill-tag">Prompt Engineering</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Supervised Learning</span>
+                            <span class="skill-tag">Unsupervised Learning</span>
+                            <span class="skill-tag">Machine Learning Pipeline</span>
+                            <span class="skill-tag">Machine Learning Model Evaluation</span>
+                            <span class="skill-tag">Machine Learning Model Tuning</span>
+                            <span class="skill-tag">Feature Selection</span>
+                            <span class="skill-tag">Feature Engineering</span>
+                        </div>
+                    </div>
+
+                    <!-- Data Analysis & Visualization -->
+                    <div class="skill-category reveal reveal-delay-1">
+                        <div class="skill-category-header">
+                            <h3>Data Analysis & Visualization</h3>
+                            <span class="skill-count">12</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Analytics</span>
+                            <span class="skill-tag">Business Analytics</span>
+                            <span class="skill-tag">Explanatory Data Analysis</span>
+                            <span class="skill-tag">Marketing Data Analysis</span>
+                            <span class="skill-tag">Customer Analysis</span>
+                            <span class="skill-tag">Data Segmentation</span>
+                            <span class="skill-tag">Statistical Learning</span>
+                            <span class="skill-tag">Time Series Analysis</span>
+                            <span class="skill-tag">Time Series Forecasting</span>
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Microsoft Power BI</span>
+                            <span class="skill-tag">Google Analytics</span>
+                        </div>
+                    </div>
+
+                    <!-- Engineering, Cloud & Programming -->
+                    <div class="skill-category reveal reveal-delay-2">
+                        <div class="skill-category-header">
+                            <h3>Engineering, Cloud & Programming</h3>
+                            <span class="skill-count">14</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python (Programming Language)</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Query Languages</span>
+                            <span class="skill-tag">Pandas (Software)</span>
+                            <span class="skill-tag">Matplotlib</span>
+                            <span class="skill-tag">Scikit-Learn</span>
+                            <span class="skill-tag">Data Cleaning</span>
+                            <span class="skill-tag">Data Quality</span>
+                            <span class="skill-tag">Data Modeling</span>
+                            <span class="skill-tag">Database Modeling</span>
+                            <span class="skill-tag">Relational Databases</span>
+                            <span class="skill-tag">Data Warehousing</span>
+                            <span class="skill-tag">Data Pipelines</span>
+                            <span class="skill-tag">ETL pipeline</span>
+                        </div>
+                    </div>
+
+                    <!-- Technologies & Platforms -->
+                    <div class="skill-category reveal reveal-delay-3">
+                        <div class="skill-category-header">
+                            <h3>Technologies & Platforms</h3>
+                            <span class="skill-count">7</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Google Cloud Platform (GCP)</span>
+                            <span class="skill-tag">Snowflake Cloud</span>
+                            <span class="skill-tag">Alteryx</span>
+                            <span class="skill-tag">Microsoft Business Intelligence (MSBI)</span>
+                            <span class="skill-tag">Microsoft Certified Technology</span>
+                            <span class="skill-tag">Microsoft Excel</span>
+                            <span class="skill-tag">Google Sheets</span>
+                            <span class="skill-tag">Excel Pivot</span>
+                        </div>
+                    </div>
+
+                    <!-- Business Strategy & Core Skills -->
+                    <div class="skill-category reveal reveal-delay-4">
+                        <div class="skill-category-header">
+                            <h3>Business Strategy & Core Skills</h3>
+                            <span class="skill-count">11</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Business Requirements</span>
+                            <span class="skill-tag">Business Administration</span>
+                            <span class="skill-tag">Business Development</span>
+                            <span class="skill-tag">Agile Methodologies</span>
+                            <span class="skill-tag">Analytical Thinking</span>
+                            <span class="skill-tag">Stakeholder Workshops</span>
+                            <span class="skill-tag">Communication</span>
+                            <span class="skill-tag">Digital Communication</span>
+                            <span class="skill-tag">Presentation Skills</span>
+                            <span class="skill-tag">Teamwork</span>
+                            <span class="skill-tag">Microsoft Office Projects</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== PROJECTS ===== -->
+        <section id="projects" class="section">
+            <div class="planet planet-jupiter"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">04</div>
+                    <h2>Projects</h2>
+                </div>
+                <div class="projects-container">
+
+                    <!-- Advanced AI & Analytics Projects -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Advanced AI & Analytics Projects</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Federated Data Intelligence Swarm</h4>
+                                    <div class="project-card-focus">Core Focus: Multi-Agent Systems & Data Privacy</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Key Features & Architecture:</strong></li>
+                                        <li>Features an Analyst Agent powered by Google Gemini that translates natural language into SQL queries and automatically debugs its own code if errors occur.</li>
+                                        <li>Utilizes a specialized Compliance Agent that intercepts query results to redact Personally Identifiable Information (PII) using a hybrid approach of Regex and AI reasoning.</li>
+                                        <li>Simulates a microservices environment where agents act independently and communicate via a structured protocol, ensuring a strict separation between data retrieval and security enforcement.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Context Aware Video Summary Assistant</h4>
+                                    <div class="project-card-focus">Core Focus: Retrieval-Augmented Generation (RAG) & Educational Tech</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Key Features & Architecture:</strong></li>
+                                        <li>Developed an AI-powered educational assistant that analyzes YouTube video transcripts to automatically generate summaries, flashcards, MCQs, and curated learning resources.</li>
+                                        <li>Implemented a transcript extraction and semantic search pipeline using youtube-transcript-api, Sentence-Transformers, and FAISS indexing for efficient text retrieval and contextual understanding.</li>
+                                        <li>Integrated RAG with the Gemini API and few-shot prompting to produce structured educational content, enhancing knowledge retention through visuals, quizzes, and smart recommendations.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-2">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Customer Segmentation with ML & Power BI Dashboard</h4>
+                                    <div class="project-card-focus">Core Focus: Customer Analytics & Business Intelligence</div>
+                                    <div class="project-card-skills">
+                                        <span>Machine Learning</span>
+                                        <span>Microsoft Power BI</span>
+                                        <span>Data Modeling</span>
+                                        <span>Exploratory Data Analysis (EDA)</span>
+                                    </div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Key Features & Architecture:</strong></li>
+                                        <li>Designed and developed an analytics dashboard to uncover customer behavior patterns, identify high-value segments, and drive data-informed revenue growth.</li>
+                                        <li>Constructed an end-to-end ETL pipeline using MySQL and Python (Pandas, NumPy, Matplotlib, Seaborn) for data extraction, transformation, and feature engineering (including RFM metrics, encoding, and statistical analysis).</li>
+                                        <li>Implemented K-Means clustering and built interactive Power BI dashboards with advanced DAX calculations and visual storytelling to enable actionable business insights.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Forecasting & Predictive Modeling Pipelines -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Forecasting & Predictive Modeling Pipelines</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Sales Forecasting with XGB Regressor</h4>
+                                    <div class="project-card-focus">Predict revenue trends using advanced machine learning</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Predict revenue trends using advanced machine learning for business decision optimization.</li>
+                                        <li><strong>Methods:</strong> Cleaned data, performed comprehensive EDA, and engineered features (including label encoding) to improve model accuracy.</li>
+                                        <li><strong>Optimization & Validation:</strong> Trained and optimized an XGBoost Regressor with Optuna hyperparameter tuning. Evaluated performance using a robust suite of metrics: R², MAE, MAPE, RMSE, and SMAPE.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Time Series Sales Forecasting & Seasonality Analysis</h4>
+                                    <div class="project-card-focus">Time series modeling for sales trends</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Develop a time series model to predict sales trends and decode complex seasonal patterns.</li>
+                                        <li><strong>Methods:</strong> Applied SARIMA for temporal modeling and utilized the Augmented Dickey-Fuller (ADF) Test to ensure data stationarity.</li>
+                                        <li><strong>Optimization & Outcome:</strong> Used ACF/PACF plots for feature selection and Grid Search for hyperparameter tuning, achieving a robust forecast by effectively separating temporal signals from noise.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Healthcare Diagnostic Systems -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Healthcare Diagnostic Systems</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Cardiac Disease Classification System</h4>
+                                    <div class="project-card-focus">Highly sensitive diagnostic model for cardiac disease</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Build a highly sensitive diagnostic model to predict the presence of cardiac disease.</li>
+                                        <li><strong>Methods:</strong> Utilized XGBoost for classification and Optuna for automated hyperparameter tuning.</li>
+                                        <li><strong>Validation & Outcome:</strong> Implemented K-Fold Cross-Validation to ensure model generalization, delivering a robust, reliable predictor suitable for critical healthcare use cases.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Diabetes Classification Pipeline</h4>
+                                    <div class="project-card-focus">Production-ready ML pipeline for diabetes risk</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Build a robust, production-ready machine learning pipeline to predict diabetes risk.</li>
+                                        <li><strong>Methods:</strong> Utilized K-Nearest Neighbors (KNN) within a streamlined Scikit-learn pipeline and applied SMOTE to effectively resolve class imbalance.</li>
+                                        <li><strong>Optimization & Validation:</strong> Integrated Optuna for automated hyperparameter tuning of distance metrics and neighbor counts alongside K-Fold Cross-Validation to prevent overfitting.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Foundational Workflow & Analysis Projects -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Foundational Workflow & Analysis Projects</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Titanic Survival Prediction</h4>
+                                    <div class="project-card-focus">Production-style classification workflow</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Engineer a production-style classification workflow to predict passenger survival while avoiding data leakage.</li>
+                                        <li><strong>Methods:</strong> Built robust Scikit-learn Pipelines and implemented a Naive Bayes classifier for probabilistic classification.</li>
+                                        <li><strong>Optimization & Validation:</strong> Integrated Optuna for automated, dynamic hyperparameter fine-tuning and applied K-Fold Cross-Validation to ensure model stability.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">COVID-19 Analysis</h4>
+                                    <div class="project-card-focus">End-to-end global health data analysis</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Objective:</strong> Conduct end-to-end data collection, cleaning, and exploratory analysis on global health data.</li>
+                                        <li><strong>Methods:</strong> Developed a Python-based analysis workflow using Pandas, NumPy, Matplotlib, and Seaborn.</li>
+                                        <li><strong>Outcome:</strong> Performed statistical analysis and data visualization to uncover key trends influencing virus spread, mortality, and recovery rates, generating actionable reports to support data-driven decision-making.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Industry Job Simulations -->
+                    <div class="project-group">
+                        <h3 class="project-group-title reveal">Industry Job Simulations</h3>
+                        <div class="project-cards">
+
+                            <div class="project-card reveal">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Data Analytics Job Simulation (Deloitte)</h4>
+                                    <div class="project-card-focus">Core Focus: Operational Efficiency & Dashboard Design</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Execution:</strong> Created interactive Tableau dashboards and performed detailed Excel analyses using machine telemetry and employee data.</li>
+                                        <li><strong>Outcome:</strong> Enabled detailed insights, drill-down filtering, and classification to improve operational efficiency and support informed decision-making regarding workplace fairness.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="project-card reveal reveal-delay-1">
+                                <button class="project-card-toggle" aria-label="Expand project details">+</button>
+                                <div class="project-card-header">
+                                    <h4 class="project-card-title">Data Science Job Simulation (Boston Consulting Group)</h4>
+                                    <div class="project-card-focus">Core Focus: Business Hypothesis Testing</div>
+                                </div>
+                                <div class="project-card-body">
+                                    <ul>
+                                        <li><strong>Execution:</strong> Investigated a core corporate business problem by formulating hypotheses, exploring data patterns, and engineering features to enhance model accuracy.</li>
+                                        <li><strong>Outcome:</strong> Interpreted results and delivered actionable, data-backed recommendations closely aligned with high-level business objectives.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== CERTIFICATIONS ===== -->
+        <section id="certifications" class="section">
+            <div class="planet planet-saturn"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">05</div>
+                    <h2>Certifications</h2>
+                </div>
+                <div class="cert-grid">
+                    <div class="cert-item reveal"><span class="cert-name">Google Cloud Data Analytics Certificate</span><span class="cert-issuer">Google</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Alteryx Designer Core Certified</span><span class="cert-issuer">Alteryx</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Snowflake Data Warehousing</span><span class="cert-issuer">Snowflake</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">HackerRank Intermediate SQL</span><span class="cert-issuer">HackerRank</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Microsoft Certified: Power BI Developer</span><span class="cert-issuer">Microsoft</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Tutedude Certified Data Science</span><span class="cert-issuer">Tutedude</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Google Analytics</span><span class="cert-issuer">Google Digital Academy (Skillshop)</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Google X Kaggle AI Agents 5 Day Intensive</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Foundations of Prompt Engineering</span><span class="cert-issuer">Amazon Web Services (AWS)</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Google X Kaggle Gen AI 5 Day Intensive</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to Game AI and Reinforcement Learning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Machine Learning Explainability</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Geospatial Analysis</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to AI Ethics</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Data Cleaning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Time Series</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Computer Vision</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to Deep Learning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Advance SQL</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to SQL</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Feature Engineering</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Data Visualization</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intermediate Machine Learning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Pandas</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to Machine Learning</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Python</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Intro to Programming</span><span class="cert-issuer">Kaggle</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Foundations: Data, Data, Everywhere</span><span class="cert-issuer">Coursera and Google</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Microsoft and Simplilearn certified Power BI course</span><span class="cert-issuer">Simplilearn</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">BCG - Data Science Job Simulation</span><span class="cert-issuer">Forage</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Deloitte Australia - Data Analytics Job Simulation</span><span class="cert-issuer">Forage</span></div>
+                    <div class="cert-item reveal"><span class="cert-name">Forward Program</span><span class="cert-issuer">McKinsey</span></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact" class="section">
+            <div class="planet planet-neptune"></div>
+            <div class="planet planet-uranus"></div>
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-number">06</div>
+                    <h2>Get in Touch</h2>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-text reveal">
+                        <h3>Let's work together</h3>
+                        <p>I'm always open to discussing new opportunities, data projects, and analytics challenges. Whether you need a data analyst, a collaborator on an AI project, or just want to connect — I'd love to hear from you.</p>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:wasimmahmud266@gmail.com" class="contact-item reveal reveal-right">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value">wasimmahmud266@gmail.com</div>
+                            </div>
+                        </a>
+                        <a href="https://linkedin.com/in/wasim-mahmud266" target="_blank" rel="noopener noreferrer" class="contact-item reveal reveal-right reveal-delay-1">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">LinkedIn</div>
+                                <div class="contact-value">linkedin.com/in/wasim-mahmud266</div>
+                            </div>
+                        </a>
+                        <a href="https://github.com/kevinnn-git" target="_blank" rel="noopener noreferrer" class="contact-item reveal reveal-right reveal-delay-2">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">GitHub</div>
+                                <div class="contact-value">github.com/kevinnn-git</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">© 2026 Syed Wasim Mahmud. All rights reserved.</div>
+            <div class="footer-right">Designed & Built with passion</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
